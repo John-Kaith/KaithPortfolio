@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - John Kaith Yamomo</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/jk.jpg')}}" type="image/x-icon">
+</head>
+<body>
+    <div class="background-lights">
+        <div class="light"></div>
+        <div class="light"></div>
+        <div class="light"></div>
+        <div class="light"></div>
+    </div>
+
+    <header>
+        <div class="logo">MyPortfolio();</div>
+        <nav class="nav-links">
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('about') }}">About</a></li>
+                <li><a href="{{ url_for('portfolio') }}" class="active">Portfolio</a></li>
+                <li><a href="{{ url_for('contact') }}">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="portfolio-section">
+        <div class="container">
+            <h1 class="section-title">My Projects</h1>
+
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h2 class="project-title">MediaVerse</h2>
+                    <div class="project-image">
+                        <img src="{{ url_for('static', filename='images/mediaverse.png') }}" alt="MediaVerse screenshot">
+                    </div>
+                    <p class="project-tech">Tech stack: Python, HTML, CSS, JavaScript</p>
+                    <p class="project-desc">
+                        MediaVerse is an e-commerce website designed to allow users to browse and purchase media and educational related products online
+                    </p>
+                </div>
+
+                <div class="project-card">
+                    <h2 class="project-title">Balaylanao</h2>
+                    <div class="project-image">
+                        <img src="{{ url_for('static', filename='images/Balaylanao.png') }}" alt="Balay Lanao screenshot">
+                    </div>
+                    <p class="project-tech">Tech stack: Php, HTML, CSS, JavaScript, MySQL</p>
+                    <p class="project-desc">
+                        Balaylanao is a website designed to help users explore the services and accommodations offered by Balaylanao Resort.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,500 @@
+/* General Styles */
+body {
+    background-color: black;
+    color: white;
+    font-family: 'MyFont', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+    font-family: 'MyFont';
+    src: url('/static/fonts/myfont.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'MyFont2';
+    src: url('/static/fonts/myfont2.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'MyFont3';
+    src: url('/static/fonts/myfont3.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'MyFont', sans-serif;
+    align-items: center;
+    padding: 5px 20px;
+    background: transparent;
+}
+
+.logo {
+    font-size: 17px; /* Default size */
+    color: #f3ff89;
+    font-weight: normal;
+    position: absolute;
+    left: 20px;
+    top: 15px;
+    margin-top: 6px;
+}
+
+/* Responsive Logo Placement */
+@media (max-width: 480px) {
+    .logo {
+        display: none; /* Hides logo on very small screens */
+    }
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0px;
+    left: 55%;
+    transform: translateX(-50%);
+    width: 150%;
+    height: 60px;
+    padding: 0 20px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 40px;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    position: relative;
+    transition: color 0.3s, text-shadow 0.3s;
+}
+
+nav ul li a::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background: rgba(243, 255, 137, 0.3);
+    filter: blur(15px);
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: -1;
+}
+
+nav ul li a:hover::before {
+    opacity: 1;
+}
+
+nav ul li a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px; /* Adjusts the position of the line */
+    width: 0%;
+    height: 2px;
+    background-color: #f3ff89;
+    transition: width 0.3s ease-in-out;
+}
+
+nav ul li a:hover::after,
+nav ul li a.active::after {
+    width: 100%;
+}
+
+/* Keep the line and color on the active page */
+nav ul li a.active {
+    color: white;
+}
+/* About Section */
+.about-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    width: 100%;
+}
+
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    gap: 10px;
+    padding: 20px;
+}
+
+.about-card {
+    display: flex;
+    align-items: center;
+    text-align: justify;
+    background: #1a1a1a;
+    padding: 30px;
+    border-radius: 15px;
+    border: 1.3px solid #f3ff89;
+    width: 100%;
+    max-width: 800px;
+    font-family: Arial, sans-serif;
+    box-shadow: none;
+    transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+    margin-top: 60px;
+}
+
+.about-card:hover {
+    box-shadow: 0 0 18px #f3ff89;
+    transform: scale(1.05);
+}
+
+.profile-img img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 2px solid #f3ff89;
+    box-shadow: none;
+    margin-right: 40px;
+    margin-left: 20px;
+}
+
+.about-text {
+    max-width: 600px;
+}
+
+.about-text h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    font-family: 'MyFont2', sans-serif;
+}
+
+.about-text p {
+    font-family: 'MyFont3', sans-serif;
+}
+
+/* Skills Section */
+.skills-container {
+    text-align: center;
+    margin-top: 0px;
+    size: 10px;
+}
+
+.skills-container h2 {
+    font-size: 24px;
+    margin-bottom: 20px;  
+    font-family: 'MyFont2', sans-serif;
+}
+
+.skills-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-family: 'MyFont2', sans-serif;
+}
+
+.skill {
+    display: flex;
+    align-items: center;
+    background: #1a1a1a;
+    border-radius: 10px;
+    border: 1.8px solid #f3ff89;
+    transition: box-shadow 0.3s, transform 0.3s;
+    font-weight: bold;
+    padding: 5px 10px;  
+    width: 150px;        
+    height: 40px;        
+    font-size: 14px; 
+}
+
+.skill:hover {
+    box-shadow: 0 0 8px #f3ff89;
+    transform: scale(1.1);
+}
+
+.skill img {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+/* Back-to-Front Animation */
+@keyframes zoomInForward {
+    from {
+        opacity: 0;
+        transform: scale(0.5) translateZ(-200px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateZ(0);
+    }
+}
+
+/* Apply animation to about container */
+.about-container {
+    animation: zoomInForward 0.4s ease-out;
+    opacity: 0;
+    animation-fill-mode: forwards;
+    margin-bottom: 0px;
+}
+
+.skill:hover {
+    transform: scale(1.1); /* Enlarge skill on hover */
+    box-shadow: 0 0 10px #f3ff89; /* Adds glowing effect */
+}
+
+/* Background Lights Container */
+.background-lights {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1; /* Keeps it behind all content */
+}
+
+/* Individual Lights */
+.light {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, rgba(243, 255, 137, 0.7) 10%, rgba(243, 255, 137, 0) 80%);
+    filter: blur(60px);
+    border-radius: 50%;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
+
+/* Slower Floating Animations */
+.light:nth-child(1) {
+    top: 10%;
+    left: 5%;
+    animation: floatPath1 20s infinite alternate ease-in-out;
+}
+.light:nth-child(2) {
+    top: 40%;
+    left: 85%;
+    animation: floatPath2 22s infinite alternate ease-in-out;
+}
+.light:nth-child(3) {
+    top: 75%;
+    left: 25%;
+    animation: floatPath3 24s infinite alternate ease-in-out;
+}
+.light:nth-child(4) {
+    top: 50%;
+    left: 55%;
+    animation: floatPath4 21s infinite alternate ease-in-out;
+}
+.light:nth-child(5) {
+    top: 10%;
+    left: 50%;
+    animation: floatPath5 23s infinite alternate ease-in-out;
+}
+
+/* Unique Floating Paths */
+@keyframes floatPath1 {
+    0% { transform: translate(0px, 0px) scale(1); }
+    25% { transform: translate(50px, -80px) scale(1.1); }
+    50% { transform: translate(-100px, 50px) scale(0.9); }
+    75% { transform: translate(70px, -60px) scale(1.2); }
+    100% { transform: translate(-50px, 100px) scale(1); }
+}
+
+@keyframes floatPath2 {
+    0% { transform: translate(0px, 0px) scale(1); }
+    25% { transform: translate(-80px, 40px) scale(1.1); }
+    50% { transform: translate(90px, -90px) scale(0.9); }
+    75% { transform: translate(-60px, 70px) scale(1.2); }
+    100% { transform: translate(100px, -50px) scale(1); }
+}
+
+@keyframes floatPath3 {
+    0% { transform: translate(0px, 0px) scale(1); }
+    25% { transform: translate(100px, 30px) scale(1.1); }
+    50% { transform: translate(-120px, -80px) scale(0.9); }
+    75% { transform: translate(50px, 60px) scale(1.2); }
+    100% { transform: translate(-90px, -50px) scale(1); }
+}
+
+@keyframes floatPath4 {
+    0% { transform: translate(0px, 0px) scale(1); }
+    25% { transform: translate(-50px, -100px) scale(1.1); }
+    50% { transform: translate(70px, 80px) scale(0.9); }
+    75% { transform: translate(-100px, 30px) scale(1.2); }
+    100% { transform: translate(80px, -70px) scale(1); }
+}
+
+@keyframes floatPath5 {
+    0% { transform: translate(0px, 0px) scale(1); }
+    25% { transform: translate(90px, -50px) scale(1.1); }
+    50% { transform: translate(-70px, 100px) scale(0.9); }
+    75% { transform: translate(120px, -60px) scale(1.2); }
+    100% { transform: translate(-50px, 80px) scale(1); }
+}
+
+/* 🔽 RESPONSIVE STYLES */
+
+/* Allow scrolling */
+html, body {
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* Hide logo on very small screens */
+@media (max-width: 600px) {
+    .logo {
+        display: none;
+    }
+}
+
+@media (max-width: 850px) {
+    .about-card {
+        width: 80%; /* Use percentage instead of fixed width */
+        max-width: 500px; /* Limit max size */
+        padding: 20px;
+    }
+
+    .me {
+        font-size: 12px !important;
+    }
+
+    .about-p {
+        font-size: 8px !important;
+    }
+
+    .skill-text {
+        font-size: 12px !important;
+    }
+
+    .skill {
+        font-size: 8px;
+        border-radius: 8px;
+        width: 65px;  /* Adjust width */
+        height: 15px;  /* Adjust height */
+        padding: 10px; /* Add padding inside the box */
+        display: flex; 
+        align-items: center; /* Center text & icon vertically */
+        justify-content: center; /* Center content */
+        text-align: center; 
+    }
+}
+
+
+@media (max-width: 768px) { /* Tablets & small screens */
+    .profile-img img {
+        max-width: 100px; /* Reduce size */
+        max-height: 100px;
+    }
+}
+
+@media (max-width: 480px) { /* Mobile screens */
+    .profile-img img {
+        max-width: 80px; /* Even smaller for very small devices */
+        max-height: 80px;
+    }
+
+    .about-text {
+        margin-left: 14px;
+    }
+}
+
+
+/* Adjust Navbar */
+@media (max-width: 768px) {
+    nav {
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.8);
+        padding: 0 10px;
+        z-index: 1000; /* Make sure it stays on top */
+    }
+
+    nav ul {
+        display: flex;
+        flex-direction: row; /* Keep in one line */
+        justify-content: center;
+        align-items: center;
+        gap: 15px; /* Reduce gap */
+        padding: 0;
+        margin: 0;
+    }
+
+    nav ul li a {
+        font-size: 14px; /* Smaller text */
+        padding: 5px 8px; /* Reduce padding */
+    }
+
+    /* Fix About Section Visibility */
+    .about-container {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 80px; /* Push content down so it's visible */
+        gap: 20px; /* Reduce space */
+    }
+
+    .about-text h2 {
+        font-size: 24px;
+    }
+
+    .about-text p {
+        font-size: 16px;
+    }
+
+    .profile-img img {
+        width: 140px; /* Smaller profile image */
+        height: 140px;
+        margin: 0 auto;
+    }
+}
+
+/* Center About Section on Large Screens */
+@media (min-width: 1024px) {
+    .about-container {
+        height: 50vh; /* Make it take full screen height */
+        display: flex;
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
+        gap: 50px; /* Reduce space between elements */
+    }
+
+    .about-text {
+        text-align: center; /* Center text */
+    }
+
+    .profile-img img {
+        width: 200px; /* Keep image size consistent */
+        height: 200px;
+    }
+}
+
+
+
+
+
+
+
+
+

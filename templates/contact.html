@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - John Kaith Yamomo</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/jk.jpg')}}" type="image/x-icon">
+</head>
+<body>
+    <div class="background-lights">
+        <div class="light"></div>
+        <div class="light"></div>
+        <div class="light"></div>
+        <div class="light"></div>
+        <div class="light"></div>
+    </div>
+
+    <header>
+        <div class="logo">MyPortfolio();</div>
+        <nav class="nav-links">
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('about') }}">About</a></li>
+                <li><a href="{{ url_for('portfolio') }}">Portfolio</a></li>
+                <li><a href="{{ url_for('contact') }}" class="active">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contact-section">
+        <div class="container contact-container">
+            <div class="contact-info">
+                <h1 class="section-title">Get in touch</h1>
+                <p class="section-subtitle">
+                    If you’d like to work with me, collaborate on a project, or have any questions about my work,
+                    feel free to reach out using the form or contact details below.
+                </p>
+
+                <ul class="contact-details">
+                    <li><span class="label">Email:</span> <span class="value">johnkaithpogi@gmail.com</span></li>
+                    <li><span class="label">Location:</span> <span class="value">Santa Cruz, Laguna, Philippines</span></li>
+                    <li><span class="label">Phone:</span> <span class="value">+63 975 122 0721</span></li>
+                </ul>
+            </div>
+
+            <div class="contact-form-card">
+                <h2 class="contact-title">Send a message</h2>
+                <form method="post" action="{{ url_for('contact') }}">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" placeholder="Enter your name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="4" placeholder="Write your message here..."></textarea>
+                    </div>
+                    <button type="submit" class="btn">Send</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

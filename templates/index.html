@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>John Kaith Yamomo</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/jk.jpg')}}" type="image/x-icon">
+</head>
+<body>
+    <div class="background-lights">
+        <div class="light"></div>
+        <div class="light"></div>
+        <div class="light"></div>
+        <div class="light"></div>
+        <div class="light"></div>
+    </div>    
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='templates/jk.png') }}">
+    <header>
+        <div class="logo">MyPortfolio();</div>
+        <!-- Navigation Menu -->
+        <nav class="nav-links">
+            <ul>
+                <li><a href="{{ url_for('home') }}" class="active">Home</a></li>
+                <li><a href="{{ url_for('about')}}">About</a></li>
+                <li><a href="{{ url_for('portfolio') }}">Portfolio</a></li>
+                <li><a href="{{ url_for('contact') }}">Contact</a></li>
+            </ul>
+        </nav>
+    </header>       
+    
+    <section id="home">
+        <div class="container">
+            <div class="text">
+                <p class="heading-text">Hello World, I'm</p>
+                <h1 class="name">John Kaith Yamomo</h1>
+                <p>
+                    <span class="typing"></span><span class="caret"></span>
+                </p>                
+                <p class="welcome-text">Welcome to my personal website. 👋</p>
+            </div>
+            <div class="profile-img">
+                <img src="{{ url_for('static', filename='images/Profile.jpg')}}" alt="Profile Picture">
+            </div>
+        </div>
+    </section>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

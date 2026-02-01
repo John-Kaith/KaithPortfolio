@@ -1,0 +1,67 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>John Kaith Yamomo</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/about.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/jk.jpg')}}" type="image/x-icon">
+</head>
+<body>
+    <div class="background-lights">
+        <div class="light"></div>
+        <div class="light"></div>
+        <div class="light"></div>
+        <div class="light"></div>
+    </div> 
+    <header>
+        <div class="logo">MyPortfolio();</div>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('about')}}" class="active">About</a></li>
+                <li><a href="{{ url_for('portfolio') }}">Portfolio</a></li>
+                <li><a href="{{ url_for('contact') }}">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="main.container">
+        <div class="about-container">
+            <div class="about-card">
+                <div class="profile-img">
+                    <img src="{{ url_for('static', filename='images/Profile.jpg')}}" alt="Profile Picture">
+                </div>
+                <div class="about-text">
+                    <h2 class="me">About Me</h2>
+                    <p class="about-p">
+                        Hello everyone! My name is John Kaith Yamomo, and I'm a web developer from Laguna, Philippines. 
+                        I have two years of experience in front-end web development, specializing in creating responsive 
+                        and user-friendly websites.
+                    </p>
+                    <p class="about-p">
+                        I'm passionate about building clean, modern, and interactive web designs that enhance user experience.
+                        I enjoy exploring new technologies and continuously improving my skills to develop visually appealing 
+                        and efficient websites.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="skills-container">
+            <h2 class="skill-text   ">Skills</h2>
+            <div class="skills-grid">
+                <div class="skill"><img src="{{ url_for('static', filename='images/logo/html.png')}}" alt="HTML Logo"> HTML</div>
+                <div class="skill"><img src="{{ url_for('static', filename='images/logo/css.png')}}" alt="CSS Logo"> CSS</div>
+                <div class="skill"><img src="{{ url_for('static', filename='images/logo/JavaScript.png')}}" alt="JavaScript Logo"> JavaScript</div>
+                <div class="skill"><img src="{{ url_for('static', filename='images/logo/python.png')}}" alt="Python Logo"> Python</div>
+                <div class="skill"><img src="{{ url_for('static', filename='images/logo/mysql.png')}}" alt="MySQL Logo"> MySQL</div>
+                <div class="skill"><img src="{{ url_for('static', filename='images/logo/Csharp.png')}}" alt="Csharp Logo"> C#</div>
+                <div class="skill"><img src="{{ url_for('static', filename='images/logo/Cpp.png')}}" alt="Cpp Logo"> C++</div>
+                <div class="skill"><img src="{{ url_for('static', filename='images/logo/Java.png')}}" alt="Java Logo"> Java</div>
+                <div class="skill"><img src="{{ url_for('static', filename='images/logo/Git.png')}}" alt="Git Logo"> Git</div>
+            </div>
+        </div>
+    </section>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
