@@ -6,29 +6,40 @@ document.addEventListener("DOMContentLoaded", function () {
     let isDeleting = false;
     let speed = 100; // Typing speed
 
-    function typeEffect() {
-        let currentWord = words[wordIndex];
-        let displayText = currentWord.substring(0, letterIndex);
-        
-        // Ensure gradient effect is applied properly
-        typing.innerHTML = `<span class="gradient-text">${displayText}</span><span class="cursor"></span>`;
+    if (typing) {
+        function typeEffect() {
+            let currentWord = words[wordIndex];
+            let displayText = currentWord.substring(0, letterIndex);
+            
+            // Ensure gradient effect is applied properly
+            typing.innerHTML = `<span class="gradient-text">${displayText}</span><span class="cursor"></span>`;
 
-        if (!isDeleting && letterIndex < currentWord.length) {
-            letterIndex++;
-            speed = 100; // Speed when typing
-        } else if (isDeleting && letterIndex > 0) {
-            letterIndex--;
-            speed = 50; // Speed when erasing
-        } else {
-            isDeleting = !isDeleting;
-            speed = 1000; // Pause before typing next word
-            if (!isDeleting) {
-                wordIndex = (wordIndex + 1) % words.length; // Move to next word
+            if (!isDeleting && letterIndex < currentWord.length) {
+                letterIndex++;
+                speed = 100; // Speed when typing
+            } else if (isDeleting && letterIndex > 0) {
+                letterIndex--;
+                speed = 50; // Speed when erasing
+            } else {
+                isDeleting = !isDeleting;
+                speed = 1000; // Pause before typing next word
+                if (!isDeleting) {
+                    wordIndex = (wordIndex + 1) % words.length; // Move to next word
+                }
             }
+
+            setTimeout(typeEffect, speed);
         }
 
-        setTimeout(typeEffect, speed);
+        typeEffect(); // Start the typing effect
     }
 
-    typeEffect(); // Start the typing effect
+    const navToggle = document.querySelector(".nav-toggle");
+    const nav = document.querySelector("header nav");
+
+    if (navToggle && nav) {
+        navToggle.addEventListener("click", function () {
+            nav.classList.toggle("open");
+        });
+    }
 });

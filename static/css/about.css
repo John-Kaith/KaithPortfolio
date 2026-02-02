@@ -38,6 +38,22 @@ header {
     background: transparent;
 }
 
+.nav-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.nav-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    margin: 4px 0;
+    background-color: #f3ff89;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
 .logo {
     font-size: 17px; /* Default size */
     color: #f3ff89;
@@ -417,44 +433,69 @@ html, body {
 
 /* Adjust Navbar */
 @media (max-width: 768px) {
-    nav {
+    body {
+        padding-top: 60px;
+    }
+
+    header {
         position: fixed;
         top: 0;
-        left: 50%;
-        transform: translateX(-50%);
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        background: rgba(0, 0, 0, 0.85);
+    }
+
+    .nav-toggle {
+        display: block;
+        position: absolute;
+        right: 16px;
+        top: 14px;
+        z-index: 1100;
+    }
+
+    nav {
+        position: static;
         width: 100%;
-        height: 50px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: rgba(0, 0, 0, 0.8);
-        padding: 0 10px;
-        z-index: 1000; /* Make sure it stays on top */
+        height: auto;
+        padding: 0;
     }
 
     nav ul {
-        display: flex;
-        flex-direction: row; /* Keep in one line */
-        justify-content: center;
+        flex-direction: column;
+        gap: 10px;
         align-items: center;
-        gap: 15px; /* Reduce gap */
-        padding: 0;
-        margin: 0;
+        justify-content: center;
+        width: 100%;
+        padding: 10px 0 12px;
+        margin-top: 40px;
+        background: rgba(0, 0, 0, 0.95);
+        display: none;
+    }
+
+    nav ul li {
+        width: 100%;
+        text-align: center;
     }
 
     nav ul li a {
-        font-size: 14px; /* Smaller text */
-        padding: 5px 8px; /* Reduce padding */
+        font-size: 14px;
+        padding: 5px 8px;
+        display: inline-block;
     }
 
     /* Fix About Section Visibility */
     .about-container {
         flex-direction: column;
         text-align: center;
-        padding-top: 80px; /* Push content down so it's visible */
-        gap: 20px; /* Reduce space */
+        padding-top: 80px;
+        gap: 20px;
     }
 
+    nav.open ul {
+        display: flex;
+    }
+}
     .about-text h2 {
         font-size: 24px;
     }
