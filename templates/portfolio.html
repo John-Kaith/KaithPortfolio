@@ -36,31 +36,157 @@
         <div class="container">
             <h1 class="section-title">My Projects</h1>
 
-            <div class="projects-grid">
-                <div class="project-card">
-                    <h2 class="project-title">MediaVerse</h2>
-                    <div class="project-image">
-                        <img src="{{ url_for('static', filename='images/mediaverse.png') }}" alt="MediaVerse screenshot">
-                    </div>
-                    <p class="project-tech">Tech stack: Python, HTML, CSS, JavaScript</p>
-                    <p class="project-desc">
-                        MediaVerse is an e-commerce website designed to allow users to browse and purchase media and educational related products online
-                    </p>
-                </div>
+            <!-- Websites Section -->
+            <section class="portfolio-group">
+                <h2 class="portfolio-label">Website</h2>
+                <div class="projects-grid website-grid">
+                    <button class="project-card modal-trigger" type="button" data-modal-target="mediaVerseModal">
+                        <h3 class="project-title">MediaVerse</h3>
+                        <div class="project-image">
+                            <img src="{{ url_for('static', filename='images/mediaverse.png') }}" alt="MediaVerse screenshot">
+                        </div>
+                        <p class="project-tech">Tech stack: Python, HTML, CSS, JavaScript</p>
+                        <p class="project-desc">
+                            MediaVerse is an e-commerce website designed to allow users to browse and purchase media and educational related products online.
+                        </p>
+                    </button>
 
-                <div class="project-card">
-                    <h2 class="project-title">Balaylanao</h2>
-                    <div class="project-image">
-                        <img src="{{ url_for('static', filename='images/Balaylanao.png') }}" alt="Balay Lanao screenshot">
-                    </div>
-                    <p class="project-tech">Tech stack: Php, HTML, CSS, JavaScript, MySQL</p>
+                    <button class="project-card modal-trigger" type="button" data-modal-target="balayModal">
+                        <h3 class="project-title">Balaylanao</h3>
+                        <div class="project-image">
+                            <img src="{{ url_for('static', filename='images/Balaylanao.png') }}" alt="Balay Lanao screenshot">
+                        </div>
+                        <p class="project-tech">Tech stack: PHP, HTML, CSS, JavaScript, MySQL</p>
+                        <p class="project-desc">
+                            Balaylanao is a website designed to help users explore the services and accommodations offered by Balaylanao Resort.
+                        </p>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Motion Graphics Section -->
+            <section class="portfolio-group">
+                <h2 class="portfolio-label">Motion Graphics Design</h2>
+                <div class="projects-grid">
+                    <button class="project-card motion-card mg-modal-trigger" type="button" data-modal-target="mgMapsModal">
+                        <h3 class="project-title">Maps Motion Graphics</h3>
+                        <div class="project-image">
+                            <img src="{{ url_for('static', filename='images/maps(ss).png') }}" alt="Maps motion graphics preview">
+                        </div>
+                        <p class="project-tech">Tools: After Effects, HandBrake</p>
+                        <p class="project-desc">
+                            Motion graphics edit for "Google Maps"
+                        </p>
+                    </button>
+
+                    <button class="project-card motion-card mg-modal-trigger" type="button" data-modal-target="mgSpotifyModal">
+                        <h3 class="project-title">Spotify Motion Graphics</h3>
+                        <div class="project-image">
+                            <img src="{{ url_for('static', filename='images/spotify(ss).png') }}" alt="Spotify motion graphics preview">
+                        </div>
+                        <p class="project-tech">Tools: Premiere Pro, After Effects</p>
+                        <p class="project-desc">
+                            Motion graphics edit for "Spotify".
+                        </p>
+                    </button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- MediaVerse Website Modal (template) -->
+    <div id="mediaVerseModal" class="modal-overlay" aria-hidden="true">
+        <div class="modal" role="dialog" aria-modal="true" aria-label="MediaVerse project details">
+            <div class="modal-header">
+                <h2 class="modal-title">MediaVerse</h2>
+                <button class="modal-close" type="button" aria-label="Close">&times;</button>
+            </div>
+            <div class="modal-content website-modal">
+                <div class="modal-gallery">
+                    <!-- Replace these placeholders with real screenshots -->
+                    <img src="{{ url_for('static', filename='images/mediaverse-1.png') }}" alt="MediaVerse screenshot 1" class="website-shot">
+                    <img src="{{ url_for('static', filename='images/mediaverse-2.png') }}" alt="MediaVerse screenshot 2" class="website-shot">
+                    <img src="{{ url_for('static', filename='images/mediaverse-3.png') }}" alt="MediaVerse screenshot 3" class="website-shot">
+                </div>
+                <div class="modal-text">
+                    <p class="project-tech">Tech stack: Python, Flask, HTML, CSS, JavaScript, MySQL</p>
                     <p class="project-desc">
-                        Balaylanao is a website designed to help users explore the services and accommodations offered by Balaylanao Resort.
+                        Detailed description for the MediaVerse website. Use this area to explain the goal of the
+                        project, main features (e-commerce flow, product browsing, checkout, etc.), and your role in
+                        the design and development.
                     </p>
                 </div>
             </div>
         </div>
-    </main>
+    </div>
+
+    <!-- Balaylanao Website Modal (template) -->
+    <div id="balayModal" class="modal-overlay" aria-hidden="true">
+        <div class="modal" role="dialog" aria-modal="true" aria-label="Balaylanao project details">
+            <div class="modal-header">
+                <h2 class="modal-title">Balaylanao</h2>
+                <button class="modal-close" type="button" aria-label="Close">&times;</button>
+            </div>
+            <div class="modal-content website-modal">
+                <div class="modal-gallery">
+                    <!-- Replace these placeholders with real screenshots -->
+                    <img src="{{ url_for('static', filename='images/balay-1.png') }}" alt="Balaylanao screenshot 1" class="website-shot">
+                    <img src="{{ url_for('static', filename='images/balay-2.png') }}" alt="Balaylanao screenshot 2" class="website-shot">
+                    <img src="{{ url_for('static', filename='images/balay-3.png') }}" alt="Balaylanao screenshot 3" class="website-shot">
+                </div>
+                <div class="modal-text">
+                    <p class="project-tech">Tech stack: PHP, HTML, CSS, JavaScript, MySQL</p>
+                    <p class="project-desc">
+                        Detailed description for the Balaylanao resort website. Describe the booking information,
+                        pages, and features, and how you handled the layout, responsiveness, and integration with
+                        backend or database.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Motion Graphics Modal: Maps -->
+    <div id="mgMapsModal" class="modal-overlay" aria-hidden="true">
+        <div class="modal" role="dialog" aria-modal="true" aria-label="Maps motion graphics project">
+            <div class="modal-header">
+                <h2 class="modal-title">Maps Motion Graphics</h2>
+                <button class="modal-close" type="button" aria-label="Close">&times;</button>
+            </div>
+            <div class="modal-content">
+                <h3 class="video-title">Maps</h3>
+                <video class="mg-video" controls>
+                    <source src="{{ url_for('static', filename='videos/Maps.mp4') }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <p class="project-tech">Tools: After Effects, HandBrake</p>
+                <p class="project-desc">
+                    Motion graphics edit for "Google Maps"
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Motion Graphics Modal: Spotify -->
+    <div id="mgSpotifyModal" class="modal-overlay" aria-hidden="true">
+        <div class="modal" role="dialog" aria-modal="true" aria-label="Spotify motion graphics project">
+            <div class="modal-header">
+                <h2 class="modal-title">Spotify Motion Graphics</h2>
+                <button class="modal-close" type="button" aria-label="Close">&times;</button>
+            </div>
+            <div class="modal-content">
+                <h3 class="video-title">Spotify</h3>
+                <video class="mg-video" controls>
+                    <source src="{{ url_for('static', filename='videos/Spotify.mp4') }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <p class="project-tech">Tools: Premiere Pro, After Effects</p>
+                <p class="project-desc">
+                    Motion graphics edit for "Spotify".
+                </p>
+            </div>
+        </div>
+    </div>
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>

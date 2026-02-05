@@ -404,41 +404,6 @@ nav ul li a.active {
     100% { transform: translate(100px, -50px) scale(1); }
 }
 
-/* Adjustments for Skills Section */
-.skills-container {
-    text-align: center;
-    margin-top: 50px;
-}
-
-.skills-grid {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-}
-
-.skill {
-    display: flex;
-    align-items: center;
-    background: #1a1a1a;
-    padding: 10px 20px;
-    border-radius: 10px;
-    border: 1.8px solid #f3ff89;
-    transition: box-shadow 0.3s, transform 0.3s;
-    font-weight: bold;
-}
-
-.skill:hover {
-    box-shadow: 0 0 8px #f3ff89;
-    transform: scale(1.1);
-}
-
-.skill img {
-width: 25px;
-height: 25px;
-margin-right: 10px;
-}
-
 .portfolio-section {
 min-height: 100vh;
 padding-top: 80px;
@@ -576,6 +541,13 @@ max-width: 600px;
     max-width: 1100px;
 }
 
+/* Slightly narrower grid only for Website row */
+.website-grid {
+    max-width: 950px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .project-card {
 background: #1a1a1a;
 border-radius: 15px;
@@ -584,6 +556,10 @@ padding: 12px 22px 20px;
 text-align: left;
 box-shadow: none;
 transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+display: flex;
+flex-direction: column;
+justify-content: flex-start;
+min-height: 320px;
 }
 
 .project-image {
@@ -594,9 +570,16 @@ transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
 
 .project-image img {
     width: 100%;
-    height: auto;
-    max-height: 260px;
-    object-fit: contain;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+}
+
+/* Fine-tune Motion Graphics cards so they visually match website cards */
+.motion-card .project-image img {
+    width: 100%;
+    height: 235px;
+    object-fit: cover;
     display: block;
 }
 
@@ -609,6 +592,7 @@ transform: translateY(-5px);
 font-size: 20px;
 margin: 4px 0 6px 0;
 font-family: 'MyFont2', sans-serif;
+color: #ffffff;
 }
 
 .project-tech {
@@ -654,6 +638,100 @@ color: #f3ff89;
 
 .btn.btn-outline:hover {
 background: rgba(243, 255, 137, 0.15);
+}
+
+/* Modal for Motion Graphics */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    padding: 20px;
+}
+
+.modal-overlay.open {
+    display: flex;
+}
+
+.modal {
+    background: #050505;
+    border-radius: 16px;
+    border: 1.5px solid #f3ff89;
+    max-width: 900px;
+    width: 100%;
+    max-height: 90vh;
+    padding: 18px 20px 22px;
+    box-shadow: 0 0 25px rgba(243, 255, 137, 0.4);
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.modal-title {
+    font-family: 'MyFont2', sans-serif;
+    font-size: 22px;
+}
+
+.modal-close {
+    background: transparent;
+    border: none;
+    color: #f3ff89;
+    font-size: 26px;
+    cursor: pointer;
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 6px;
+}
+
+.video-title {
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+
+.mg-video {
+    width: 100%;
+    border-radius: 8px;
+    outline: none;
+}
+
+/* Website project modal layout */
+.website-modal {
+    gap: 16px;
+}
+
+.modal-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.website-shot {
+    width: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.modal-text {
+    text-align: left;
+}
+
+@media (max-width: 700px) {
+    .modal-gallery {
+        grid-template-columns: 1fr 1fr;
+    }
 }
 
 @media (max-width: 992px) {

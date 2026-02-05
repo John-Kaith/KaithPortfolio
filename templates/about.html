@@ -37,32 +37,48 @@
                     <img src="{{ url_for('static', filename='images/profile.jpg')}}" alt="Profile Picture">
                 </div>
                 <div class="about-text">
-                    <h2 class="me">About Me</h2>
+                    <h2 class="me">About John Kaith</h2>
                     <p class="about-p">
-                        Hello everyone! My name is John Kaith Yamomo, and I'm a web developer from Laguna, Philippines. 
-                        I have two years of experience in front-end web development, specializing in creating responsive 
-                        and user-friendly websites.
+                        I'm John Kaith Yamomo, a web developer based in Laguna, Philippines. I have two years of
+                        experience focusing on front-end development, building responsive and user-friendly websites.
                     </p>
                     <p class="about-p">
-                        I'm passionate about building clean, modern, and interactive web designs that enhance user experience.
-                        I enjoy exploring new technologies and continuously improving my skills to develop visually appealing 
-                        and efficient websites.
+                        I enjoy creating clean, modern interfaces and interactive experiences that improve how people
+                        use the web. I'm always exploring new tools and technologies to refine my craft and deliver
+                        reliable, visually engaging solutions.
                     </p>
                 </div>
             </div>
         </div>
         <div class="skills-container">
-            <h2 class="skill-text   ">Skills</h2>
-            <div class="skills-grid">
-                <div class="skill"><img src="{{ url_for('static', filename='images/logo/html.png')}}" alt="HTML Logo"> HTML</div>
-                <div class="skill"><img src="{{ url_for('static', filename='images/logo/css.png')}}" alt="CSS Logo"> CSS</div>
-                <div class="skill"><img src="{{ url_for('static', filename='images/logo/JavaScript.png')}}" alt="JavaScript Logo"> JavaScript</div>
-                <div class="skill"><img src="{{ url_for('static', filename='images/logo/python.png')}}" alt="Python Logo"> Python</div>
-                <div class="skill"><img src="{{ url_for('static', filename='images/logo/mysql.png')}}" alt="MySQL Logo"> MySQL</div>
-                <div class="skill"><img src="{{ url_for('static', filename='images/logo/Csharp.png')}}" alt="Csharp Logo"> C#</div>
-                <div class="skill"><img src="{{ url_for('static', filename='images/logo/Cpp.png')}}" alt="Cpp Logo"> C++</div>
-                <div class="skill"><img src="{{ url_for('static', filename='images/logo/Java.png')}}" alt="Java Logo"> Java</div>
-                <div class="skill"><img src="{{ url_for('static', filename='images/logo/Git.png')}}" alt="Git Logo"> Git</div>
+            <h2 class="skill-text">Skills</h2>
+
+            <div class="skills-groups">
+                <div class="skills-group">
+                    <h3 class="skills-subtitle">Programming</h3>
+                    <div class="skills-grid">
+                        <div class="skill"><img src="{{ url_for('static', filename='images/logo/html.png')}}" alt="HTML Logo"> HTML</div>
+                        <div class="skill"><img src="{{ url_for('static', filename='images/logo/css.png')}}" alt="CSS Logo"> CSS</div>
+                        <div class="skill"><img src="{{ url_for('static', filename='images/logo/JavaScript.png')}}" alt="JavaScript Logo"> JavaScript</div>
+                        <div class="skill"><img src="{{ url_for('static', filename='images/logo/python.png')}}" alt="Python Logo"> Python</div>
+                        <div class="skill"><img src="{{ url_for('static', filename='images/logo/mysql.png')}}" alt="MySQL Logo"> MySQL</div>
+                        <div class="skill"><img src="{{ url_for('static', filename='images/logo/Csharp.png')}}" alt="Csharp Logo"> C#</div>
+                        <div class="skill"><img src="{{ url_for('static', filename='images/logo/Cpp.png')}}" alt="Cpp Logo"> C++</div>
+                        <div class="skill"><img src="{{ url_for('static', filename='images/logo/Java.png')}}" alt="Java Logo"> Java</div>
+                        <div class="skill"><img src="{{ url_for('static', filename='images/logo/Git.png')}}" alt="Git Logo"> Git</div>
+                        <div class="skill"><img src="{{ url_for('static', filename='images/logo/php.png')}}" alt="Php Logo"> PHP</div>
+                    </div>
+                </div>
+
+                <div class="skills-group editing-skills-group">
+                    <h3 class="skills-subtitle">Editing Software</h3>
+                    <div class="skills-grid">
+                        <div class="skill"><img src="{{ url_for('static', filename='images/logo/AE.png')}}" alt="After Effects Logo"> After Effects</div>
+                        <div class="skill"><img src="{{ url_for('static', filename='images/logo/AM.png')}}" alt="Adobe Media Encoder Logo"> Alight Motion</div>
+                        <div class="skill"><img src="{{ url_for('static', filename='images/logo/capcut.png')}}" alt="CapCut Logo"> CapCut</div>
+                        <div class="skill"><img src="{{ url_for('static', filename='images/logo/HandBrake.png')}}" alt="HandBrake Logo"> HandBrake</div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

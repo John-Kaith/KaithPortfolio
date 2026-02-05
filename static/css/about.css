@@ -207,6 +207,7 @@ nav ul li a.active {
 .skills-container {
     text-align: center;
     margin-top: 0px;
+    margin-bottom: 80px;
     size: 10px;
 }
 
@@ -216,11 +217,29 @@ nav ul li a.active {
     font-family: 'MyFont2', sans-serif;
 }
 
+.skills-groups {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+}
+
+.skills-group {
+    max-width: 800px;
+}
+
+.skills-subtitle {
+    font-size: 18px;
+    margin-bottom: 12px;
+    font-family: 'MyFont2', sans-serif;
+}
+
 .skills-grid {
     display: flex;
     justify-content: center;
     gap: 20px;
     font-family: 'MyFont2', sans-serif;
+    flex-wrap: wrap;
 }
 
 .skill {
@@ -243,9 +262,14 @@ nav ul li a.active {
 }
 
 .skill img {
-    width: 20px;
-    height: 20px;
-    margin-right: 5px;
+    width: 28px;
+    height: auto;
+    margin-right: 12px;
+}
+
+/* Slightly larger icons for Editing Software only */
+.editing-skills-group .skill img {
+    width: 34px;
 }
 
 /* Back-to-Front Animation */
@@ -494,20 +518,6 @@ html, body {
 
     nav.open ul {
         display: flex;
-    }
-}
-    .about-text h2 {
-        font-size: 24px;
-    }
-
-    .about-text p {
-        font-size: 16px;
-    }
-
-    .profile-img img {
-        width: 140px; /* Smaller profile image */
-        height: 140px;
-        margin: 0 auto;
     }
 }
 
