@@ -11,6 +11,8 @@ body {
     text-align: center;
     overflow-x: hidden;
     overflow-y: auto;
+    opacity: 0; /* intro animation start */
+    animation: page-intro 0.6s ease-out forwards;
 }
 
 @font-face {
@@ -18,6 +20,18 @@ body {
     src: url('/static/fonts/myfont.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
+}
+
+/* Page load intro animation */
+@keyframes page-intro {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @font-face {
@@ -182,10 +196,11 @@ nav ul li a.active {
         gap: 10px;
         align-items: center;
         justify-content: center;
-        width: 100%;
-        padding: 10px 0 12px;
-        margin-top: 40px;
+        width: auto;
+        padding: 8px 18px 10px;
+        margin: 32px 12px 0 auto; /* compact panel near burger */
         background: rgba(0, 0, 0, 0.95);
+        border-radius: 12px;
         display: none;
     }
 
@@ -868,4 +883,68 @@ font-size: 26px;
 .section-subtitle {
 font-size: 14px;
 }
+}
+
+/* Extra-small screens (phones) refinements */
+@media (max-width: 480px) {
+    body {
+        font-size: 13px; /* ~10% smaller on small phones */
+        overflow-x: hidden;
+        padding-top: 200px; /* slightly less space above hero than default 60px */
+    }
+
+    .container {
+        padding-left: 16px;
+        padding-right: 16px;
+        height: auto;            /* prevent full-viewport height on home */
+        padding-top: 32px;       /* reduce empty space above content */
+        padding-bottom: 32px;
+    }
+
+    header {
+        padding-inline: 16px;
+    }
+
+    .hero-content h1 {
+        font-size: 1.6rem;
+    }
+
+    .hero-content p {
+        font-size: 0.9rem;
+    }
+
+    .projects-grid {
+        gap: 12px;
+    }
+
+    .project-card {
+        padding: 10px; /* smaller card padding ~20% reduction from desktop */
+    }
+
+    .project-card .project-title {
+        font-size: 0.95rem;
+    }
+
+    .project-card .project-tech,
+    .project-card .project-desc {
+        font-size: 0.8rem;
+    }
+
+    .contact-container {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .contact-info,
+    .contact-form-card {
+        width: 100%;
+    }
+
+    .contact-form-card {
+        padding: 10px; /* shrink send-a-message card */
+    }
+
+    .modal {
+        max-width: 100%;
+    }
 }

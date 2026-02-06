@@ -485,10 +485,11 @@ html, body {
         gap: 10px;
         align-items: center;
         justify-content: center;
-        width: 100%;
-        padding: 10px 0 12px;
-        margin-top: 40px;
+        width: auto;
+        padding: 8px 18px 10px;
+        margin: 32px 12px 0 auto; /* compact panel near burger */
         background: rgba(0, 0, 0, 0.95);
+        border-radius: 12px;
         display: none;
     }
 
