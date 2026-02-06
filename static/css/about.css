@@ -267,11 +267,6 @@ nav ul li a.active {
     margin-right: 12px;
 }
 
-/* Slightly larger icons for Editing Software only */
-.editing-skills-group .skill img {
-    width: 34px;
-}
-
 /* Back-to-Front Animation */
 @keyframes zoomInForward {
     from {

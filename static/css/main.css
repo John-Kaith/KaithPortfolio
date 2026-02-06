@@ -728,6 +728,118 @@ background: rgba(243, 255, 137, 0.15);
     text-align: left;
 }
 
+/* Contact status modal */
+.status-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2500;
+}
+
+.status-modal-overlay.open {
+    display: flex;
+}
+
+.status-modal {
+    background: #050510;
+    border-radius: 16px;
+    border: 1px solid #f3ff89;
+    padding: 24px 28px 20px;
+    max-width: 420px;
+    width: 90%;
+    box-shadow: 0 0 30px rgba(243, 255, 137, 0.4);
+    position: relative;
+    text-align: center;
+}
+
+.status-modal-close {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    background: transparent;
+    border: none;
+    color: #f3ff89;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.status-title {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+}
+
+.status-text {
+    font-size: 0.95rem;
+    color: #d0d0d0;
+    margin-bottom: 18px;
+}
+
+.status-modal-button {
+    padding: 8px 18px;
+    border-radius: 999px;
+    border: none;
+    background: linear-gradient(90deg, #f3ff89, #ffd86b);
+    color: #050510;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Lightbox overlay for zooming gallery images */
+.lightbox-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.9);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2200;
+}
+
+.lightbox-overlay.open {
+    display: flex;
+}
+
+.lightbox-image {
+    max-width: 90vw;
+    max-height: 85vh;
+    border-radius: 12px;
+    border: 2px solid #f3ff89;
+    box-shadow: 0 0 25px rgba(243, 255, 137, 0.6);
+}
+
+.lightbox-close,
+.lightbox-prev,
+.lightbox-next {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid #f3ff89;
+    color: #f3ff89;
+    border-radius: 999px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 22px;
+}
+
+.lightbox-close {
+    top: 20px;
+    right: 24px;
+}
+
+.lightbox-prev {
+    left: 24px;
+}
+
+.lightbox-next {
+    right: 24px;
+}
+
 @media (max-width: 700px) {
     .modal-gallery {
         grid-template-columns: 1fr 1fr;

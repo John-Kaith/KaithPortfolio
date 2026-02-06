@@ -92,4 +92,75 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }
     });
+
+    // Lightbox for website gallery images inside modals
+    const lightboxOverlay = document.getElementById("lightboxOverlay");
+    const lightboxImage = lightboxOverlay ? lightboxOverlay.querySelector(".lightbox-image") : null;
+    const lightboxClose = lightboxOverlay ? lightboxOverlay.querySelector(".lightbox-close") : null;
+    const lightboxPrev = lightboxOverlay ? lightboxOverlay.querySelector(".lightbox-prev") : null;
+    const lightboxNext = lightboxOverlay ? lightboxOverlay.querySelector(".lightbox-next") : null;
+
+    let lightboxImages = [];
+    let lightboxIndex = 0;
+
+    function openLightbox(index) {
+        if (!lightboxOverlay || !lightboxImage || lightboxImages.length === 0) return;
+        lightboxIndex = index;
+        lightboxImage.src = lightboxImages[lightboxIndex].src;
+        lightboxOverlay.classList.add("open");
+        lightboxOverlay.setAttribute("aria-hidden", "false");
+    }
+
+    function closeLightbox() {
+        if (!lightboxOverlay) return;
+        lightboxOverlay.classList.remove("open");
+        lightboxOverlay.setAttribute("aria-hidden", "true");
+    }
+
+    function showNext(delta) {
+        if (lightboxImages.length === 0) return;
+        lightboxIndex = (lightboxIndex + delta + lightboxImages.length) % lightboxImages.length;
+        lightboxImage.src = lightboxImages[lightboxIndex].src;
+    }
+
+    const galleryImages = document.querySelectorAll(".modal-gallery .website-shot");
+    if (galleryImages.length && lightboxOverlay && lightboxImage) {
+        galleryImages.forEach(img => {
+            img.style.cursor = "pointer";
+            img.addEventListener("click", () => {
+                const gallery = img.closest(".modal-gallery");
+                if (!gallery) return;
+                lightboxImages = Array.from(gallery.querySelectorAll(".website-shot"));
+                const index = lightboxImages.indexOf(img);
+                if (index !== -1) {
+                    openLightbox(index);
+                }
+            });
+        });
+
+        if (lightboxClose) {
+            lightboxClose.addEventListener("click", closeLightbox);
+        }
+
+        if (lightboxPrev) {
+            lightboxPrev.addEventListener("click", () => showNext(-1));
+        }
+
+        if (lightboxNext) {
+            lightboxNext.addEventListener("click", () => showNext(1));
+        }
+
+        lightboxOverlay.addEventListener("click", (e) => {
+            if (e.target === lightboxOverlay) {
+                closeLightbox();
+            }
+        });
+
+        document.addEventListener("keydown", (e) => {
+            if (!lightboxOverlay.classList.contains("open")) return;
+            if (e.key === "Escape") closeLightbox();
+            if (e.key === "ArrowRight") showNext(1);
+            if (e.key === "ArrowLeft") showNext(-1);
+        });
+    }
 });

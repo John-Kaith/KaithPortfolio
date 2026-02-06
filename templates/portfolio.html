@@ -45,9 +45,9 @@
                         <div class="project-image">
                             <img src="{{ url_for('static', filename='images/mediaverse.png') }}" alt="MediaVerse screenshot">
                         </div>
-                        <p class="project-tech">Tech stack: Python, HTML, CSS, JavaScript</p>
+                        <p class="project-tech">Tech stack: Python, Flask, HTML, CSS, JavaScript, MySQL</p>
                         <p class="project-desc">
-                            MediaVerse is an e-commerce website designed to allow users to browse and purchase media and educational related products online.
+                            MediaVerse is an e-commerce website where users can buy media, games, books, and educational products. It is designed to be easy to use, making browsing and shopping simple and convenient.
                         </p>
                     </button>
 
@@ -58,7 +58,7 @@
                         </div>
                         <p class="project-tech">Tech stack: PHP, HTML, CSS, JavaScript, MySQL</p>
                         <p class="project-desc">
-                            Balaylanao is a website designed to help users explore the services and accommodations offered by Balaylanao Resort.
+                            BalayLanao is a booking website designed to help customers easily explore available accommodations and special offers. It provides clear information and a user-friendly interface, making the booking process simple and convenient.
                         </p>
                     </button>
                 </div>
@@ -104,16 +104,14 @@
             <div class="modal-content website-modal">
                 <div class="modal-gallery">
                     <!-- Replace these placeholders with real screenshots -->
-                    <img src="{{ url_for('static', filename='images/mediaverse-1.png') }}" alt="MediaVerse screenshot 1" class="website-shot">
-                    <img src="{{ url_for('static', filename='images/mediaverse-2.png') }}" alt="MediaVerse screenshot 2" class="website-shot">
-                    <img src="{{ url_for('static', filename='images/mediaverse-3.png') }}" alt="MediaVerse screenshot 3" class="website-shot">
+                    <img src="{{ url_for('static', filename='images/mediaverse.png') }}" alt="MediaVerse screenshot 1" class="website-shot">
+                    <img src="{{ url_for('static', filename='images/mediaverse2.png') }}" alt="MediaVerse screenshot 2" class="website-shot">
+                    <img src="{{ url_for('static', filename='images/mediaverse3.png') }}" alt="MediaVerse screenshot 3" class="website-shot">
                 </div>
                 <div class="modal-text">
                     <p class="project-tech">Tech stack: Python, Flask, HTML, CSS, JavaScript, MySQL</p>
                     <p class="project-desc">
-                        Detailed description for the MediaVerse website. Use this area to explain the goal of the
-                        project, main features (e-commerce flow, product browsing, checkout, etc.), and your role in
-                        the design and development.
+                        MediaVerse is an e-commerce website where users can buy media, games, books, and educational products. It is designed to be easy to use, making browsing and shopping simple and convenient.
                     </p>
                 </div>
             </div>
@@ -130,16 +128,14 @@
             <div class="modal-content website-modal">
                 <div class="modal-gallery">
                     <!-- Replace these placeholders with real screenshots -->
-                    <img src="{{ url_for('static', filename='images/balay-1.png') }}" alt="Balaylanao screenshot 1" class="website-shot">
-                    <img src="{{ url_for('static', filename='images/balay-2.png') }}" alt="Balaylanao screenshot 2" class="website-shot">
-                    <img src="{{ url_for('static', filename='images/balay-3.png') }}" alt="Balaylanao screenshot 3" class="website-shot">
+                    <img src="{{ url_for('static', filename='images/balaylanao.png') }}" alt="Balaylanao screenshot 1" class="website-shot">
+                    <img src="{{ url_for('static', filename='images/balaylanao2.png') }}" alt="Balaylanao screenshot 2" class="website-shot">
+                    <img src="{{ url_for('static', filename='images/balaylanao3.png') }}" alt="Balaylanao screenshot 3" class="website-shot">
                 </div>
                 <div class="modal-text">
                     <p class="project-tech">Tech stack: PHP, HTML, CSS, JavaScript, MySQL</p>
                     <p class="project-desc">
-                        Detailed description for the Balaylanao resort website. Describe the booking information,
-                        pages, and features, and how you handled the layout, responsiveness, and integration with
-                        backend or database.
+                        BalayLanao is a booking website designed to help customers easily explore available accommodations and special offers. It provides clear information and a user-friendly interface, making the booking process simple and convenient.
                     </p>
                 </div>
             </div>
@@ -156,8 +152,7 @@
             <div class="modal-content">
                 <h3 class="video-title">Maps</h3>
                 <video class="mg-video" controls>
-                    <source src="{{ url_for('static', filename='videos/Maps.mp4') }}" type="video/mp4">
-                    Your browser does not support the video tag.
+                    <source src="{{ url_for('static', filename='videos/Maps.mp4') }}" type="video/mp4"> 
                 </video>
                 <p class="project-tech">Tools: After Effects, HandBrake</p>
                 <p class="project-desc">
@@ -178,14 +173,21 @@
                 <h3 class="video-title">Spotify</h3>
                 <video class="mg-video" controls>
                     <source src="{{ url_for('static', filename='videos/Spotify.mp4') }}" type="video/mp4">
-                    Your browser does not support the video tag.
                 </video>
-                <p class="project-tech">Tools: Premiere Pro, After Effects</p>
+                <p class="project-tech">Tools: After Effects, HandBrake</p>
                 <p class="project-desc">
                     Motion graphics edit for "Spotify".
                 </p>
             </div>
         </div>
+    </div>
+
+    <!-- Lightbox overlay for zooming website gallery images -->
+    <div id="lightboxOverlay" class="lightbox-overlay" aria-hidden="true">
+        <button class="lightbox-close" type="button" aria-label="Close">&times;</button>
+        <button class="lightbox-prev" type="button" aria-label="Previous image">&#10094;</button>
+        <img class="lightbox-image" src="" alt="Zoomed screenshot">
+        <button class="lightbox-next" type="button" aria-label="Next image">&#10095;</button>
     </div>
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
