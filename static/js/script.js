@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     const typing = document.querySelector(".typing");
-    const words = ["Full Stack Developer", "Web Designer", "Freelancer",];
+    const words = ["Full Stack Developer", "Web Designer", "Freelancer", "Motion Graphics Editor"];
     let wordIndex = 0;
     let letterIndex = 0;
     let isDeleting = false;

@@ -485,6 +485,20 @@ max-width: 600px;
     margin-right: 6px;
 }
 
+.contact-details .value {
+    color: #ddd;
+}
+
+/* Contact social links: white, matching other text */
+.contact-details .value a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.contact-details .value a:hover {
+    text-decoration: underline;
+}
+
 .contact-form-card {
     background: #1a1a1a;
     border-radius: 15px;
