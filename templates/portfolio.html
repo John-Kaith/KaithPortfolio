@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio - John Kaith Yamomo</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
-    <link rel="shortcut icon" href="{{ url_for('static', filename='images/jk.jpg')}}" type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename='images/jk.jpg') }}" type="image/jpeg">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
-<body>
-    <div class="background-lights">
+<body class="page-enter">
+    <div class="background-lights" aria-hidden="true">
+        <div class="light"></div>
         <div class="light"></div>
         <div class="light"></div>
         <div class="light"></div>
@@ -17,7 +18,7 @@
 
     <header>
         <div class="logo">MyPortfolio();</div>
-        <button class="nav-toggle" aria-label="Toggle navigation">
+        <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
             <span></span>
             <span></span>
             <span></span>
@@ -33,161 +34,305 @@
     </header>
 
     <main class="portfolio-section">
-        <div class="container">
-            <h1 class="section-title">My Projects</h1>
+        <div class="portfolio-inner">
+            <div class="portfolio-header reveal">
+                <p class="section-eyebrow">Selected Work</p>
+                <h1 class="section-title">My Projects</h1>
+            </div>
 
-            <!-- Websites Section -->
             <section class="portfolio-group">
-                <h2 class="portfolio-label">Website</h2>
+                <h2 class="portfolio-label reveal reveal-delay-1">Website</h2>
                 <div class="projects-grid website-grid">
-                    <button class="project-card modal-trigger" type="button" data-modal-target="mediaVerseModal">
-                        <h3 class="project-title">MediaVerse</h3>
+                    <button class="project-card modal-trigger reveal reveal-delay-1" type="button" data-modal-target="mediaVerseModal">
                         <div class="project-image">
                             <img src="{{ url_for('static', filename='images/mediaverse.png') }}" alt="MediaVerse screenshot">
                         </div>
-                        <p class="project-tech">Tech stack: Python, Flask, HTML, CSS, JavaScript, MySQL</p>
-                        <p class="project-desc">
-                            MediaVerse is an e-commerce website where users can buy media, games, books, and educational products. It is designed to be easy to use, making browsing and shopping simple and convenient.
-                        </p>
+                        <div class="project-body">
+                            <h3 class="project-title">MediaVerse</h3>
+                            <p class="project-tech">Python, Flask, HTML, CSS, JavaScript, MySQL</p>
+                            <p class="project-desc">
+                                An e-commerce website where users can buy media, games, books, and educational products with a simple, convenient shopping experience.
+                            </p>
+                            <span class="project-card-hint">View details &rarr;</span>
+                        </div>
                     </button>
 
-                    <button class="project-card modal-trigger" type="button" data-modal-target="balayModal">
-                        <h3 class="project-title">Balaylanao</h3>
+                    <button class="project-card modal-trigger reveal reveal-delay-2" type="button" data-modal-target="balayModal">
                         <div class="project-image">
                             <img src="{{ url_for('static', filename='images/Balaylanao.png') }}" alt="Balay Lanao screenshot">
                         </div>
-                        <p class="project-tech">Tech stack: PHP, HTML, CSS, JavaScript, MySQL</p>
-                        <p class="project-desc">
-                            BalayLanao is a booking website designed to help customers easily explore available accommodations and special offers. It provides clear information and a user-friendly interface, making the booking process simple and convenient.
-                        </p>
+                        <div class="project-body">
+                            <h3 class="project-title">Balaylanao</h3>
+                            <p class="project-tech">PHP, HTML, CSS, JavaScript, MySQL</p>
+                            <p class="project-desc">
+                                A booking website that helps customers explore accommodations and special offers through a clear, user-friendly interface.
+                            </p>
+                            <span class="project-card-hint">View details &rarr;</span>
+                        </div>
+                    </button>
+
+                    <button class="project-card modal-trigger reveal reveal-delay-3" type="button" data-modal-target="ecoWeaveModal">
+                        <div class="project-image">
+                            <img src="{{ url_for('static', filename='images/ecoweave.png') }}" alt="EcoWeave screenshot">
+                        </div>
+                        <div class="project-body">
+                            <h3 class="project-title">EcoWeave</h3>
+                            <p class="project-tech">PHP, HTML, CSS, JavaScript, MySQL</p>
+                            <p class="project-desc">
+                                An e-commerce website for handmade vases and artificial flowers, with shop, cart, checkout, and cash-on-delivery orders.
+                            </p>
+                            <span class="project-card-hint">View details &rarr;</span>
+                        </div>
                     </button>
                 </div>
             </section>
 
-            <!-- Motion Graphics Section -->
             <section class="portfolio-group">
-                <h2 class="portfolio-label">Motion Graphics Design</h2>
+                <h2 class="portfolio-label reveal reveal-delay-1">Motion Graphics</h2>
                 <div class="projects-grid">
-                    <button class="project-card motion-card mg-modal-trigger" type="button" data-modal-target="mgMapsModal">
-                        <h3 class="project-title">Maps</h3>
+                    <button class="project-card mg-modal-trigger reveal reveal-delay-1" type="button" data-modal-target="mgMapsModal">
                         <div class="project-image">
                             <img src="{{ url_for('static', filename='images/maps(ss).png') }}" alt="Maps motion graphics preview">
                         </div>
-                        <p class="project-tech">Tools: After Effects, HandBrake</p>
-                        <p class="project-desc">
-                            Motion graphics edit for "Google Maps"
-                        </p>
+                        <div class="project-body">
+                            <h3 class="project-title">Maps</h3>
+                            <p class="project-tech">After Effects, HandBrake</p>
+                            <p class="project-desc">Motion graphics edit for Google Maps.</p>
+                            <span class="project-card-hint">Watch preview &rarr;</span>
+                        </div>
                     </button>
 
-                    <button class="project-card motion-card mg-modal-trigger" type="button" data-modal-target="mgSpotifyModal">
-                        <h3 class="project-title">Spotify</h3>
+                    <button class="project-card mg-modal-trigger reveal reveal-delay-2" type="button" data-modal-target="mgSpotifyModal">
                         <div class="project-image">
                             <img src="{{ url_for('static', filename='images/spotify(ss).png') }}" alt="Spotify motion graphics preview">
                         </div>
-                        <p class="project-tech">Tools: Premiere Pro, After Effects</p>
-                        <p class="project-desc">
-                            Motion graphics edit for "Spotify".
-                        </p>
+                        <div class="project-body">
+                            <h3 class="project-title">Spotify</h3>
+                            <p class="project-tech">Premiere Pro, After Effects</p>
+                            <p class="project-desc">Motion graphics edit for Spotify.</p>
+                            <span class="project-card-hint">Watch preview &rarr;</span>
+                        </div>
                     </button>
                 </div>
             </section>
         </div>
     </main>
 
-    <!-- MediaVerse Website Modal (template) -->
     <div id="mediaVerseModal" class="modal-overlay" aria-hidden="true">
-        <div class="modal" role="dialog" aria-modal="true" aria-label="MediaVerse project details">
+        <div class="modal modal-project" role="dialog" aria-modal="true" aria-label="MediaVerse project details">
             <div class="modal-header">
-                <h2 class="modal-title">MediaVerse</h2>
+                <div class="modal-header-text">
+                    <span class="modal-eyebrow">Website Project</span>
+                    <h2 class="modal-title">MediaVerse</h2>
+                </div>
                 <button class="modal-close" type="button" aria-label="Close">&times;</button>
             </div>
-            <div class="modal-content website-modal">
+            <div class="modal-body">
                 <div class="modal-gallery">
-                    <!-- Replace these placeholders with real screenshots -->
                     <img src="{{ url_for('static', filename='images/mediaverse.png') }}" alt="MediaVerse screenshot 1" class="website-shot">
                     <img src="{{ url_for('static', filename='images/mediaverse2.png') }}" alt="MediaVerse screenshot 2" class="website-shot">
                     <img src="{{ url_for('static', filename='images/mediaverse3.png') }}" alt="MediaVerse screenshot 3" class="website-shot">
                 </div>
-                <div class="modal-text">
-                    <p class="project-tech">Tech stack: Python, Flask, HTML, CSS, JavaScript, MySQL</p>
-                    <p class="project-desc">
-                        MediaVerse is an e-commerce website where users can buy media, games, books, and educational products. It is designed to be easy to use, making browsing and shopping simple and convenient.
-                    </p>
+                <div class="modal-details">
+                    <div class="modal-block">
+                        <p class="modal-block-label">Tech Stack</p>
+                        <ul class="modal-tags">
+                            <li>Python</li>
+                            <li>Flask</li>
+                            <li>HTML</li>
+                            <li>CSS</li>
+                            <li>JavaScript</li>
+                            <li>MySQL</li>
+                        </ul>
+                    </div>
+                    <div class="modal-block">
+                        <p class="modal-block-label">Overview</p>
+                        <p class="modal-desc">
+                            MediaVerse is an e-commerce website where users can buy media, games, books, and educational products. It is designed to be easy to use, making browsing and shopping simple and convenient.
+                        </p>
+                    </div>
+                    <div class="modal-block modal-link-block">
+                        <p class="modal-block-label">Live Site</p>
+                        <a href="https://mediaverse-968n.onrender.com" class="modal-site-link" target="_blank" rel="noopener noreferrer">
+                            <span class="modal-site-link-icon" aria-hidden="true">&#8599;</span>
+                            <span class="modal-site-link-text">mediaverse-968n.onrender.com</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Balaylanao Website Modal (template) -->
     <div id="balayModal" class="modal-overlay" aria-hidden="true">
-        <div class="modal" role="dialog" aria-modal="true" aria-label="Balaylanao project details">
+        <div class="modal modal-project" role="dialog" aria-modal="true" aria-label="Balaylanao project details">
             <div class="modal-header">
-                <h2 class="modal-title">Balaylanao</h2>
+                <div class="modal-header-text">
+                    <span class="modal-eyebrow">Website Project</span>
+                    <h2 class="modal-title">Balaylanao</h2>
+                </div>
                 <button class="modal-close" type="button" aria-label="Close">&times;</button>
             </div>
-            <div class="modal-content website-modal">
+            <div class="modal-body">
                 <div class="modal-gallery">
-                    <!-- Replace these placeholders with real screenshots -->
-                    <img src="{{ url_for('static', filename='images/balaylanao.png') }}" alt="Balaylanao screenshot 1" class="website-shot">
+                    <img src="{{ url_for('static', filename='images/Balaylanao.png') }}" alt="Balaylanao screenshot 1" class="website-shot">
                     <img src="{{ url_for('static', filename='images/balaylanao2.png') }}" alt="Balaylanao screenshot 2" class="website-shot">
                     <img src="{{ url_for('static', filename='images/balaylanao3.png') }}" alt="Balaylanao screenshot 3" class="website-shot">
                 </div>
-                <div class="modal-text">
-                    <p class="project-tech">Tech stack: PHP, HTML, CSS, JavaScript, MySQL</p>
-                    <p class="project-desc">
-                        BalayLanao is a booking website designed to help customers easily explore available accommodations and special offers. It provides clear information and a user-friendly interface, making the booking process simple and convenient.
-                    </p>
+                <div class="modal-details">
+                    <div class="modal-block">
+                        <p class="modal-block-label">Tech Stack</p>
+                        <ul class="modal-tags">
+                            <li>PHP</li>
+                            <li>HTML</li>
+                            <li>CSS</li>
+                            <li>JavaScript</li>
+                            <li>MySQL</li>
+                        </ul>
+                    </div>
+                    <div class="modal-block">
+                        <p class="modal-block-label">Overview</p>
+                        <p class="modal-desc">
+                            BalayLanao is a booking website designed to help customers easily explore available accommodations and special offers. It provides clear information and a user-friendly interface, making the booking process simple and convenient.
+                        </p>
+                    </div>
+                    <div class="modal-block modal-link-block">
+                        <p class="modal-block-label">Live Site</p>
+                        <span class="modal-site-link modal-site-link--unavailable">
+                            <span class="modal-site-link-icon" aria-hidden="true">&#8599;</span>
+                            <span class="modal-site-link-text">Not Available</span>
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Motion Graphics Modal: Maps -->
+    <div id="ecoWeaveModal" class="modal-overlay" aria-hidden="true">
+        <div class="modal modal-project" role="dialog" aria-modal="true" aria-label="EcoWeave project details">
+            <div class="modal-header">
+                <div class="modal-header-text">
+                    <span class="modal-eyebrow">Website Project</span>
+                    <h2 class="modal-title">EcoWeave</h2>
+                </div>
+                <button class="modal-close" type="button" aria-label="Close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-gallery">
+                    <img src="{{ url_for('static', filename='images/ecoweave.png') }}" alt="EcoWeave home page" class="website-shot">
+                    <img src="{{ url_for('static', filename='images/ecoweave2.png') }}" alt="EcoWeave shop page" class="website-shot">
+                    <img src="{{ url_for('static', filename='images/ecoweave3.png') }}" alt="EcoWeave orders page" class="website-shot">
+                </div>
+                <div class="modal-details">
+                    <div class="modal-block">
+                        <p class="modal-block-label">Tech Stack</p>
+                        <ul class="modal-tags">
+                            <li>PHP</li>
+                            <li>HTML</li>
+                            <li>CSS</li>
+                            <li>JavaScript</li>
+                            <li>MySQL</li>
+                        </ul>
+                    </div>
+                    <div class="modal-block">
+                        <p class="modal-block-label">Overview</p>
+                        <p class="modal-desc">
+                            EcoWeave is an e-commerce website for pink and white home accents, featuring handmade vases and artificial flowers. Customers can browse the collection, manage their cart, place orders, and pay cash on delivery.
+                        </p>
+                    </div>
+                    <div class="modal-block modal-link-block">
+                        <p class="modal-block-label">Live Site</p>
+                        <span class="modal-site-link modal-site-link--unavailable">
+                            <span class="modal-site-link-icon" aria-hidden="true">&#8599;</span>
+                            <span class="modal-site-link-text">Not Available</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div id="mgMapsModal" class="modal-overlay" aria-hidden="true">
-        <div class="modal" role="dialog" aria-modal="true" aria-label="Maps motion graphics project">
+        <div class="modal modal-video" role="dialog" aria-modal="true" aria-label="Maps motion graphics project">
             <div class="modal-header">
-                <h2 class="modal-title">Maps</h2>
+                <div class="modal-header-text">
+                    <span class="modal-eyebrow">Motion Graphics</span>
+                    <h2 class="modal-title">Maps</h2>
+                </div>
                 <button class="modal-close" type="button" aria-label="Close">&times;</button>
             </div>
-            <div class="modal-content">
-                <h3 class="video-title">Maps</h3>
-                <video class="mg-video" controls>
-                    <source src="{{ url_for('static', filename='videos/Maps.mp4') }}" type="video/mp4"> 
-                </video>
-                <p class="project-tech">Tools: After Effects, HandBrake</p>
-                <p class="project-desc">
-                    Motion graphics edit for "Google Maps"
-                </p>
+            <div class="modal-body">
+                <div class="modal-media">
+                    <video class="mg-video" controls>
+                        <source src="{{ url_for('static', filename='videos/Maps.mp4') }}" type="video/mp4">
+                    </video>
+                </div>
+                <div class="modal-details">
+                    <div class="modal-block">
+                        <p class="modal-block-label">Tools</p>
+                        <ul class="modal-tags">
+                            <li>After Effects</li>
+                            <li>HandBrake</li>
+                        </ul>
+                    </div>
+                    <div class="modal-block">
+                        <p class="modal-block-label">Overview</p>
+                        <p class="modal-desc">Motion graphics edit for Google Maps.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Motion Graphics Modal: Spotify -->
     <div id="mgSpotifyModal" class="modal-overlay" aria-hidden="true">
-        <div class="modal" role="dialog" aria-modal="true" aria-label="Spotify motion graphics project">
+        <div class="modal modal-video" role="dialog" aria-modal="true" aria-label="Spotify motion graphics project">
             <div class="modal-header">
-                <h2 class="modal-title">Spotify</h2>
+                <div class="modal-header-text">
+                    <span class="modal-eyebrow">Motion Graphics</span>
+                    <h2 class="modal-title">Spotify</h2>
+                </div>
                 <button class="modal-close" type="button" aria-label="Close">&times;</button>
             </div>
-            <div class="modal-content">
-                <h3 class="video-title">Spotify</h3>
-                <video class="mg-video" controls>
-                    <source src="{{ url_for('static', filename='videos/Spotify.mp4') }}" type="video/mp4">
-                </video>
-                <p class="project-tech">Tools: After Effects, HandBrake</p>
-                <p class="project-desc">
-                    Motion graphics edit for "Spotify".
-                </p>
+            <div class="modal-body">
+                <div class="modal-media">
+                    <video class="mg-video" controls>
+                        <source src="{{ url_for('static', filename='videos/Spotify.mp4') }}" type="video/mp4">
+                    </video>
+                </div>
+                <div class="modal-details">
+                    <div class="modal-block">
+                        <p class="modal-block-label">Tools</p>
+                        <ul class="modal-tags">
+                            <li>Premiere Pro</li>
+                            <li>After Effects</li>
+                        </ul>
+                    </div>
+                    <div class="modal-block">
+                        <p class="modal-block-label">Overview</p>
+                        <p class="modal-desc">Motion graphics edit for Spotify.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Lightbox overlay for zooming website gallery images -->
     <div id="lightboxOverlay" class="lightbox-overlay" aria-hidden="true">
-        <button class="lightbox-close" type="button" aria-label="Close">&times;</button>
-        <button class="lightbox-prev" type="button" aria-label="Previous image">&#10094;</button>
-        <img class="lightbox-image" src="" alt="Zoomed screenshot">
-        <button class="lightbox-next" type="button" aria-label="Next image">&#10095;</button>
+        <div class="lightbox-shell">
+            <button class="lightbox-close" type="button" aria-label="Close">&times;</button>
+            <div class="lightbox-stage">
+                <button class="lightbox-prev" type="button" aria-label="Previous image">&#10094;</button>
+                <div class="lightbox-frame" id="lightboxViewport">
+                    <img class="lightbox-image" src="" alt="Zoomed screenshot" draggable="false">
+                </div>
+                <button class="lightbox-next" type="button" aria-label="Next image">&#10095;</button>
+            </div>
+            <div class="lightbox-toolbar">
+                <button class="lightbox-tool" type="button" data-zoom="out" aria-label="Zoom out">&minus;</button>
+                <span class="lightbox-zoom-level">100%</span>
+                <button class="lightbox-tool" type="button" data-zoom="in" aria-label="Zoom in">+</button>
+                <button class="lightbox-tool lightbox-reset" type="button" data-zoom="reset">Reset</button>
+                <span class="lightbox-hint">Scroll to zoom · Drag to pan · Double-click to fit</span>
+            </div>
+        </div>
     </div>
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>

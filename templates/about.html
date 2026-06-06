@@ -1,21 +1,24 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>John Kaith Yamomo</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/about.css') }}">
-    <link rel="shortcut icon" href="{{ url_for('static', filename='images/jk.jpg')}}" type="image/x-icon">
+    <title>About - John Kaith Yamomo</title>
+    <link rel="icon" href="{{ url_for('static', filename='images/jk.jpg') }}" type="image/jpeg">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
-<body>
-    <div class="background-lights">
+<body class="page-enter">
+    <div class="background-lights" aria-hidden="true">
         <div class="light"></div>
         <div class="light"></div>
         <div class="light"></div>
         <div class="light"></div>
-    </div> 
+        <div class="light"></div>
+    </div>
+
     <header>
         <div class="logo">MyPortfolio();</div>
-        <button class="nav-toggle" aria-label="Toggle navigation">
+        <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
             <span></span>
             <span></span>
             <span></span>
@@ -23,62 +26,62 @@
         <nav class="nav-links">
             <ul>
                 <li><a href="{{ url_for('home') }}">Home</a></li>
-                <li><a href="{{ url_for('about')}}" class="active">About</a></li>
+                <li><a href="{{ url_for('about') }}" class="active">About</a></li>
                 <li><a href="{{ url_for('portfolio') }}">Portfolio</a></li>
                 <li><a href="{{ url_for('contact') }}">Contact</a></li>
             </ul>
         </nav>
     </header>
 
-    <section class="main.container">
-        <div class="about-container">
-            <div class="about-card">
+    <main class="about-page">
+        <div class="about-layout">
+            <div class="about-card reveal">
                 <div class="profile-img">
-                    <img src="{{ url_for('static', filename='images/profile.jpg')}}" alt="Profile Picture">
+                    <img src="{{ url_for('static', filename='images/profile.jpg') }}" alt="John Kaith Yamomo">
                 </div>
                 <div class="about-text">
-                    <h2 class="me">About Me</h2>
-                    <p class="about-p">
-                        I’m John Kaith Yamomo, a web developer and editor from Laguna, Philippines, with two years of experience in front-end development and two months of experience in motion graphics editing. I focus on creating responsive and user-friendly websites.
+                    <p class="section-eyebrow">Profile</p>
+                    <h2>About Me</h2>
+                    <p>
+                        I'm John Kaith Yamomo, a web developer and editor from Laguna, Philippines, with two years of experience in front-end development and two months of experience in motion graphics editing. I focus on creating responsive and user-friendly websites.
                     </p>
-                    <p class="about-p">
+                    <p>
                         I create clean and modern designs with interactive features that make websites easy to use. I also make ads and keep learning new tools and technologies to improve my skills and deliver reliable, visually appealing work.
                     </p>
                 </div>
             </div>
-        </div>
-        <div class="skills-container">
-            <h2 class="skill-text">Skills</h2>
 
-            <div class="skills-groups">
-                <div class="skills-group">
-                    <h3 class="skills-subtitle">Programming</h3>
-                    <div class="skills-grid">
-                        <div class="skill"><img src="{{ url_for('static', filename='images/logo/html.png')}}" alt="HTML Logo"> HTML</div>
-                        <div class="skill"><img src="{{ url_for('static', filename='images/logo/css.png')}}" alt="CSS Logo"> CSS</div>
-                        <div class="skill"><img src="{{ url_for('static', filename='images/logo/JavaScript.png')}}" alt="JavaScript Logo"> JavaScript</div>
-                        <div class="skill"><img src="{{ url_for('static', filename='images/logo/python.png')}}" alt="Python Logo"> Python</div>
-                        <div class="skill"><img src="{{ url_for('static', filename='images/logo/mysql.png')}}" alt="MySQL Logo"> MySQL</div>
-                        <div class="skill"><img src="{{ url_for('static', filename='images/logo/Csharp.png')}}" alt="Csharp Logo"> C#</div>
-                        <div class="skill"><img src="{{ url_for('static', filename='images/logo/Cpp.png')}}" alt="Cpp Logo"> C++</div>
-                        <div class="skill"><img src="{{ url_for('static', filename='images/logo/Java.png')}}" alt="Java Logo"> Java</div>
-                        <div class="skill"><img src="{{ url_for('static', filename='images/logo/Git.png')}}" alt="Git Logo"> Git</div>
-                        <div class="skill"><img src="{{ url_for('static', filename='images/logo/php.png')}}" alt="Php Logo"> PHP</div>
+            <section class="skills-section reveal reveal-delay-1">
+                <p class="section-eyebrow">Expertise</p>
+                <h2>Skills</h2>
+
+                <div class="skills-groups">
+                    <div class="skills-group">
+                        <h3 class="skills-subtitle">Programming</h3>
+                        <div class="skills-grid">
+                            <div class="skill reveal reveal-delay-1"><img src="{{ url_for('static', filename='images/logo/html.png') }}" alt=""> HTML</div>
+                            <div class="skill reveal reveal-delay-1"><img src="{{ url_for('static', filename='images/logo/css.png') }}" alt=""> CSS</div>
+                            <div class="skill reveal reveal-delay-2"><img src="{{ url_for('static', filename='images/logo/JavaScript.png') }}" alt=""> JavaScript</div>
+                            <div class="skill reveal reveal-delay-2"><img src="{{ url_for('static', filename='images/logo/python.png') }}" alt=""> Python</div>
+                            <div class="skill reveal reveal-delay-4"><img src="{{ url_for('static', filename='images/logo/Cpp.png') }}" alt=""> C++</div>
+                            <div class="skill reveal reveal-delay-4"><img src="{{ url_for('static', filename='images/logo/Git.png') }}" alt=""> Git</div>
+                            <div class="skill reveal reveal-delay-4"><img src="{{ url_for('static', filename='images/logo/php.png') }}" alt=""> PHP</div>
+                        </div>
+                    </div>
+
+                    <div class="skills-group">
+                        <h3 class="skills-subtitle">Editing Software</h3>
+                        <div class="skills-grid">
+                            <div class="skill reveal reveal-delay-1"><img src="{{ url_for('static', filename='images/logo/AE.png') }}" alt=""> After Effects</div>
+                            <div class="skill reveal reveal-delay-2"><img src="{{ url_for('static', filename='images/logo/AM.png') }}" alt=""> Alight Motion</div>
+                            <div class="skill reveal reveal-delay-3"><img src="{{ url_for('static', filename='images/logo/capcut.png') }}" alt=""> CapCut</div>
+                            <div class="skill reveal reveal-delay-4"><img src="{{ url_for('static', filename='images/logo/handbrake.png') }}" alt=""> HandBrake</div>
+                        </div>
                     </div>
                 </div>
-
-                <div class="skills-group editing-skills-group">
-                    <h3 class="skills-subtitle">Editing Software</h3>
-                    <div class="skills-grid">
-                        <div class="skill"><img src="{{ url_for('static', filename='images/logo/AE.png')}}" alt="After Effects Logo"> After Effects</div>
-                        <div class="skill"><img src="{{ url_for('static', filename='images/logo/AM.png')}}" alt="Adobe Media Encoder Logo"> Alight Motion</div>
-                        <div class="skill"><img src="{{ url_for('static', filename='images/logo/capcut.png')}}" alt="CapCut Logo"> CapCut</div>
-                        <div class="skill"><img src="{{ url_for('static', filename='images/logo/HandBrake.png')}}" alt="HandBrake Logo"> HandBrake</div>
-                    </div>
-                </div>
-            </div>
+            </section>
         </div>
-    </section>
+    </main>
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>

@@ -1,21 +1,78 @@
+from email.mime.text import MIMEText
+from email.utils import formataddr
 from flask import Flask, render_template, request, redirect, url_for
+import logging
 import os
-from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail
+import smtplib
+
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
+logger = logging.getLogger(__name__)
+
+
+def send_contact_email(name, email, message):
+    smtp_email = os.environ.get('SMTP_EMAIL')
+    smtp_password = os.environ.get('SMTP_PASSWORD')
+    smtp_to = os.environ.get('SMTP_TO', smtp_email)
+    smtp_host = os.environ.get('SMTP_HOST', 'smtp.gmail.com')
+    smtp_port = int(os.environ.get('SMTP_PORT', '587'))
+
+    if not smtp_email:
+        logger.error('Contact email failed: SMTP_EMAIL is not set')
+        return False
+    if not smtp_password:
+        logger.error('Contact email failed: SMTP_PASSWORD is not set')
+        return False
+    if not smtp_to:
+        logger.error('Contact email failed: SMTP_TO is not set')
+        return False
+
+    subject = f'Portfolio message from {name}'
+    body = (
+        f'You received a new message from your portfolio contact form.\n\n'
+        f'Name: {name}\n'
+        f'Email: {email}\n\n'
+        f'Message:\n{message}\n\n'
+        f'---\n'
+        f'Reply to this email to respond directly to {name}.'
+    )
+
+    msg = MIMEText(body, 'plain', 'utf-8')
+    msg['Subject'] = subject
+    msg['From'] = formataddr((f'{name} via Portfolio', smtp_email))
+    msg['To'] = smtp_to
+    msg['Reply-To'] = formataddr((name, email))
+
+    try:
+        with smtplib.SMTP(smtp_host, smtp_port) as server:
+            server.starttls()
+            server.login(smtp_email, smtp_password)
+            server.sendmail(smtp_email, [smtp_to], msg.as_string())
+
+        logger.info('Contact email sent to %s', smtp_to)
+        return True
+    except Exception:
+        logger.exception('SMTP send failed')
+        return False
+
 
 @app.route('/')
 def home():
     return render_template('index.html')
 
+
 @app.route('/about')
 def about():
     return render_template('about.html')
 
+
 @app.route('/portfolio')
 def portfolio():
     return render_template('portfolio.html')
+
 
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
@@ -26,38 +83,15 @@ def contact():
 
         status = 'error'
         if name and email and message:
-            api_key = os.environ.get('SENDGRID_API_KEY')
-            from_email = os.environ.get('SENDGRID_FROM')
-            to_email = os.environ.get('SENDGRID_TO', from_email)
-
-            if api_key and from_email and to_email:
-                subject = f"New message from {name} via portfolio site"
-                full_body = (
-                    f"From: {name} <{email}>\n\n"
-                    f"{message}"
-                )
-
-                mail = Mail(
-                    from_email=from_email,
-                    to_emails=to_email,
-                    subject=subject,
-                    plain_text_content=full_body,
-                )
-
-                try:
-                    sg = SendGridAPIClient(api_key)
-                    response = sg.send(mail)
-                    if response.status_code in (200, 202):
-                        status = 'success'
-                    else:
-                        status = 'error'
-                except Exception:
-                    status = 'error'
+            if send_contact_email(name, email, message):
+                status = 'success'
 
         return redirect(url_for('contact', status=status))
 
     status = request.args.get('status')
     return render_template('contact.html', status=status)
 
+
 if __name__ == '__main__':
+    logging.basicConfig(level=logging.INFO)
     app.run(debug=True)
