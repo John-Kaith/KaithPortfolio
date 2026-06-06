@@ -51,22 +51,30 @@ function initNavigation() {
     const nav = document.querySelector("header nav");
     if (!navToggle || !nav) return;
 
-    navToggle.addEventListener("click", function () {
+    function closeNav() {
+        nav.classList.remove("open");
+        navToggle.setAttribute("aria-expanded", "false");
+    }
+
+    navToggle.addEventListener("click", function (event) {
+        event.stopPropagation();
         const isOpen = nav.classList.toggle("open");
         navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
     });
 
     nav.querySelectorAll("a").forEach(function (link) {
-        link.addEventListener("click", function () {
-            nav.classList.remove("open");
-            navToggle.setAttribute("aria-expanded", "false");
-        });
+        link.addEventListener("click", closeNav);
     });
 
     document.addEventListener("click", function (event) {
         if (!nav.contains(event.target) && !navToggle.contains(event.target)) {
-            nav.classList.remove("open");
-            navToggle.setAttribute("aria-expanded", "false");
+            closeNav();
+        }
+    });
+
+    window.addEventListener("resize", function () {
+        if (window.innerWidth > 900) {
+            closeNav();
         }
     });
 }
@@ -87,11 +95,15 @@ function initScrollReveal() {
             entries.forEach(function (entry) {
                 if (entry.isIntersecting) {
                     entry.target.classList.add("visible");
+                    entry.target.querySelectorAll(".reveal").forEach(function (child) {
+                        child.classList.add("visible");
+                        observer.unobserve(child);
+                    });
                     observer.unobserve(entry.target);
                 }
             });
         },
-        { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+        { threshold: 0.08, rootMargin: "0px 0px -20px 0px" }
     );
 
     items.forEach(function (item) {
@@ -184,6 +196,8 @@ function initModals() {
 
     document.addEventListener("keydown", function (event) {
         if (event.key !== "Escape") return;
+        if (document.querySelector(".lightbox-overlay.open")) return;
+        if (document.querySelector(".status-modal-overlay.open")) return;
         modalOverlays.forEach(function (overlay) {
             if (overlay.classList.contains("open")) closeModal(overlay);
         });
@@ -368,6 +382,30 @@ function initLightbox() {
     });
 
     window.addEventListener("mouseup", function () {
+        isDragging = false;
+        viewport.classList.remove("is-panning");
+    });
+
+    viewport.addEventListener("touchstart", function (event) {
+        if (scale <= 1 || event.touches.length !== 1) return;
+        isDragging = true;
+        dragStartX = event.touches[0].clientX;
+        dragStartY = event.touches[0].clientY;
+        dragPanX = panX;
+        dragPanY = panY;
+        viewport.classList.add("is-panning");
+    }, { passive: true });
+
+    viewport.addEventListener("touchmove", function (event) {
+        if (!isDragging || event.touches.length !== 1) return;
+        event.preventDefault();
+        panX = dragPanX + (event.touches[0].clientX - dragStartX);
+        panY = dragPanY + (event.touches[0].clientY - dragStartY);
+        clampPan();
+        applyTransform();
+    }, { passive: false });
+
+    viewport.addEventListener("touchend", function () {
         isDragging = false;
         viewport.classList.remove("is-panning");
     });
