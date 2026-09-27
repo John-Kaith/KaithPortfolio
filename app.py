@@ -29,11 +29,9 @@ logger = logging.getLogger(__name__)
 SMTP_TIMEOUT_SECONDS = 10
 HTTP_TIMEOUT_SECONDS = 15
 
-# Drop the CV at static/files/cv.pdf — the About page switches from
+# Drop the CV (any file name) into static/cv/ — the About page switches from
 # "CV coming soon" to live View/Download buttons automatically.
-CV_DIRECTORY = os.path.join(app.static_folder, 'files')
-CV_FILENAME = 'cv.pdf'
-CV_DOWNLOAD_NAME = 'John-Kaith-Yamomo-CV.pdf'
+CV_DIRECTORY = os.path.join(app.static_folder, 'cv')
 
 MAX_NAME_LENGTH = 100
 MAX_EMAIL_LENGTH = 254
@@ -229,23 +227,36 @@ def _format_file_size(num_bytes):
     return f'{max(1, round(num_bytes / 1024))} KB'
 
 
-def get_cv_info():
-    path = os.path.join(CV_DIRECTORY, CV_FILENAME)
-    if not os.path.isfile(path):
+def find_cv_filename():
+    # With several PDFs, the last by name wins (e.g. YAMOMO_CV_2027.pdf over YAMOMO_CV_2026.pdf).
+    try:
+        pdfs = sorted(name for name in os.listdir(CV_DIRECTORY) if name.lower().endswith('.pdf'))
+    except FileNotFoundError:
         return None
-    return {'size': _format_file_size(os.path.getsize(path))}
+    return pdfs[-1] if pdfs else None
+
+
+def get_cv_info():
+    filename = find_cv_filename()
+    if not filename:
+        return None
+    return {
+        'filename': filename,
+        'size': _format_file_size(os.path.getsize(os.path.join(CV_DIRECTORY, filename))),
+    }
 
 
 def send_cv(as_attachment):
-    if not get_cv_info():
+    cv = get_cv_info()
+    if not cv:
         return redirect(url_for('about'))
 
     response = send_from_directory(
         CV_DIRECTORY,
-        CV_FILENAME,
+        cv['filename'],
         mimetype='application/pdf',
         as_attachment=as_attachment,
-        download_name=CV_DOWNLOAD_NAME,
+        download_name=cv['filename'],
     )
     # Keep the CV (phone number, email) out of search engine results.
     response.headers['X-Robots-Tag'] = 'noindex'
