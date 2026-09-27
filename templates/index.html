@@ -7,6 +7,9 @@
     <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" sizes="any">
     <link rel="icon" href="{{ url_for('static', filename='images/favicon.png') }}" type="image/png">
     <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/apple-touch-icon.png') }}">
+    <link rel="preload" href="{{ url_for('static', filename='fonts/myfont.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ url_for('static', filename='fonts/myfont2.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ url_for('static', filename='fonts/myfont3.woff2') }}" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body class="page-enter">
@@ -50,7 +53,7 @@
                 </div>
             </div>
             <div class="profile-img reveal reveal-delay-1">
-                <img src="{{ url_for('static', filename='images/profile.jpg') }}" alt="John Kaith Yamomo">
+                <img src="{{ url_for('static', filename='images/profile.webp') }}" alt="John Kaith Yamomo">
             </div>
         </div>
     </section>

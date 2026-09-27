@@ -7,6 +7,9 @@
     <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" sizes="any">
     <link rel="icon" href="{{ url_for('static', filename='images/favicon.png') }}" type="image/png">
     <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/apple-touch-icon.png') }}">
+    <link rel="preload" href="{{ url_for('static', filename='fonts/myfont.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ url_for('static', filename='fonts/myfont2.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ url_for('static', filename='fonts/myfont3.woff2') }}" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body class="page-enter">
@@ -46,7 +49,7 @@
                 <div class="projects-grid website-grid">
                     <button class="project-card modal-trigger reveal reveal-delay-1" type="button" data-modal-target="mediaVerseModal">
                         <div class="project-image">
-                            <img src="{{ url_for('static', filename='images/mediaverse.png') }}" alt="MediaVerse screenshot">
+                            <img src="{{ url_for('static', filename='images/projects/mediaverse-1-thumb.webp') }}" alt="MediaVerse screenshot">
                         </div>
                         <div class="project-body">
                             <h3 class="project-title">MediaVerse</h3>
@@ -60,7 +63,7 @@
 
                     <button class="project-card modal-trigger reveal reveal-delay-2" type="button" data-modal-target="balayModal">
                         <div class="project-image">
-                            <img src="{{ url_for('static', filename='images/Balaylanao.png') }}" alt="Balay Lanao screenshot">
+                            <img src="{{ url_for('static', filename='images/projects/balaylanao-1-thumb.webp') }}" alt="Balay Lanao screenshot">
                         </div>
                         <div class="project-body">
                             <h3 class="project-title">Balaylanao</h3>
@@ -74,7 +77,7 @@
 
                     <button class="project-card modal-trigger reveal reveal-delay-3" type="button" data-modal-target="ecoWeaveModal">
                         <div class="project-image">
-                            <img src="{{ url_for('static', filename='images/ecoweave.png') }}" alt="EcoWeave screenshot">
+                            <img src="{{ url_for('static', filename='images/projects/ecoweave-1-thumb.webp') }}" alt="EcoWeave screenshot">
                         </div>
                         <div class="project-body">
                             <h3 class="project-title">EcoWeave</h3>
@@ -93,7 +96,7 @@
                 <div class="projects-grid">
                     <button class="project-card mg-modal-trigger reveal reveal-delay-1" type="button" data-modal-target="mgMapsModal">
                         <div class="project-image">
-                            <img src="{{ url_for('static', filename='images/maps(ss).png') }}" alt="Maps motion graphics preview">
+                            <img src="{{ url_for('static', filename='images/projects/maps.webp') }}" alt="Maps motion graphics preview">
                         </div>
                         <div class="project-body">
                             <h3 class="project-title">Maps</h3>
@@ -105,7 +108,7 @@
 
                     <button class="project-card mg-modal-trigger reveal reveal-delay-2" type="button" data-modal-target="mgSpotifyModal">
                         <div class="project-image">
-                            <img src="{{ url_for('static', filename='images/spotify(ss).png') }}" alt="Spotify motion graphics preview">
+                            <img src="{{ url_for('static', filename='images/projects/spotify.webp') }}" alt="Spotify motion graphics preview">
                         </div>
                         <div class="project-body">
                             <h3 class="project-title">Spotify</h3>
@@ -130,9 +133,9 @@
             </div>
             <div class="modal-body">
                 <div class="modal-gallery">
-                    <img src="{{ url_for('static', filename='images/mediaverse.png') }}" alt="MediaVerse screenshot 1" class="website-shot">
-                    <img src="{{ url_for('static', filename='images/mediaverse2.png') }}" alt="MediaVerse screenshot 2" class="website-shot">
-                    <img src="{{ url_for('static', filename='images/mediaverse3.png') }}" alt="MediaVerse screenshot 3" class="website-shot">
+                    <img data-src="{{ url_for('static', filename='images/projects/mediaverse-1.webp') }}" alt="MediaVerse screenshot 1" class="website-shot">
+                    <img data-src="{{ url_for('static', filename='images/projects/mediaverse-2.webp') }}" alt="MediaVerse screenshot 2" class="website-shot">
+                    <img data-src="{{ url_for('static', filename='images/projects/mediaverse-3.webp') }}" alt="MediaVerse screenshot 3" class="website-shot">
                 </div>
                 <div class="modal-details">
                     <div class="modal-block">
@@ -158,6 +161,7 @@
                             <span class="modal-site-link-icon" aria-hidden="true">&#8599;</span>
                             <span class="modal-site-link-text">mediaverse-968n.onrender.com</span>
                         </a>
+                        <p class="modal-link-note">Hosted on a free server, so it may take up to a minute to wake up.</p>
                     </div>
                 </div>
             </div>
@@ -175,9 +179,9 @@
             </div>
             <div class="modal-body">
                 <div class="modal-gallery">
-                    <img src="{{ url_for('static', filename='images/Balaylanao.png') }}" alt="Balaylanao screenshot 1" class="website-shot">
-                    <img src="{{ url_for('static', filename='images/balaylanao2.png') }}" alt="Balaylanao screenshot 2" class="website-shot">
-                    <img src="{{ url_for('static', filename='images/balaylanao3.png') }}" alt="Balaylanao screenshot 3" class="website-shot">
+                    <img data-src="{{ url_for('static', filename='images/projects/balaylanao-1.webp') }}" alt="Balaylanao screenshot 1" class="website-shot">
+                    <img data-src="{{ url_for('static', filename='images/projects/balaylanao-2.webp') }}" alt="Balaylanao screenshot 2" class="website-shot">
+                    <img data-src="{{ url_for('static', filename='images/projects/balaylanao-3.webp') }}" alt="Balaylanao screenshot 3" class="website-shot">
                 </div>
                 <div class="modal-details">
                     <div class="modal-block">
@@ -219,9 +223,9 @@
             </div>
             <div class="modal-body">
                 <div class="modal-gallery">
-                    <img src="{{ url_for('static', filename='images/ecoweave.png') }}" alt="EcoWeave home page" class="website-shot">
-                    <img src="{{ url_for('static', filename='images/ecoweave2.png') }}" alt="EcoWeave shop page" class="website-shot">
-                    <img src="{{ url_for('static', filename='images/ecoweave3.png') }}" alt="EcoWeave orders page" class="website-shot">
+                    <img data-src="{{ url_for('static', filename='images/projects/ecoweave-1.webp') }}" alt="EcoWeave home page" class="website-shot">
+                    <img data-src="{{ url_for('static', filename='images/projects/ecoweave-2.webp') }}" alt="EcoWeave shop page" class="website-shot">
+                    <img data-src="{{ url_for('static', filename='images/projects/ecoweave-3.webp') }}" alt="EcoWeave orders page" class="website-shot">
                 </div>
                 <div class="modal-details">
                     <div class="modal-block">
@@ -263,7 +267,7 @@
             </div>
             <div class="modal-body">
                 <div class="modal-media">
-                    <video class="mg-video" controls>
+                    <video class="mg-video" controls preload="none" poster="{{ url_for('static', filename='images/projects/maps.webp') }}">
                         <source src="{{ url_for('static', filename='videos/Maps.mp4') }}" type="video/mp4">
                     </video>
                 </div>
@@ -295,7 +299,7 @@
             </div>
             <div class="modal-body">
                 <div class="modal-media">
-                    <video class="mg-video" controls>
+                    <video class="mg-video" controls preload="none" poster="{{ url_for('static', filename='images/projects/spotify.webp') }}">
                         <source src="{{ url_for('static', filename='videos/Spotify.mp4') }}" type="video/mp4">
                     </video>
                 </div>

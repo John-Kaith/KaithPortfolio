@@ -7,6 +7,9 @@
     <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" sizes="any">
     <link rel="icon" href="{{ url_for('static', filename='images/favicon.png') }}" type="image/png">
     <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/apple-touch-icon.png') }}">
+    <link rel="preload" href="{{ url_for('static', filename='fonts/myfont.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ url_for('static', filename='fonts/myfont2.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ url_for('static', filename='fonts/myfont3.woff2') }}" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body class="page-enter">
@@ -37,51 +40,91 @@
 
     <main class="about-page">
         <div class="about-layout">
-            <div class="about-card reveal">
-                <div class="profile-img">
-                    <img src="{{ url_for('static', filename='images/profile.jpg') }}" alt="John Kaith Yamomo">
+            <aside class="profile-card reveal" aria-label="Profile and CV">
+                <div class="profile-head">
+                    <div class="profile-photo">
+                        <img src="{{ url_for('static', filename='images/profile.webp') }}" alt="John Kaith Yamomo">
+                    </div>
+                    <div class="profile-id">
+                        <h1 class="profile-name">John Kaith Yamomo</h1>
+                        <p class="profile-role">Web Developer &amp; Motion Graphics Editor</p>
+                        <ul class="profile-meta">
+                            <li>
+                                <svg class="profile-meta-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/>
+                                    <circle cx="12" cy="10" r="2.4"/>
+                                </svg>
+                                Santa Cruz, Laguna
+                            </li>
+                            <li><span class="status-dot" aria-hidden="true"></span> Open to work</li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="about-text">
-                    <p class="section-eyebrow">Profile</p>
-                    <h2>About Me</h2>
+
+                <div class="cv-slot">
+                    {% if cv %}
+                    <a href="{{ url_for('cv_download') }}" class="btn cv-btn">Download CV <span aria-hidden="true">&darr;</span></a>
+                    <a href="{{ url_for('cv_view') }}" class="btn btn-outline cv-btn" target="_blank" rel="noopener">View CV <span aria-hidden="true">&#8599;</span></a>
+                    <p class="cv-note">PDF &middot; {{ cv.size }}</p>
+                    {% else %}
+                    <span class="btn cv-btn is-disabled" aria-disabled="true">Download CV <span aria-hidden="true">&darr;</span></span>
+                    <span class="btn btn-outline cv-btn is-disabled" aria-disabled="true">View CV <span aria-hidden="true">&#8599;</span></span>
+                    <p class="cv-note">CV coming soon</p>
+                    {% endif %}
+                </div>
+
+                <a href="{{ url_for('contact') }}" class="profile-link">Let's talk <span aria-hidden="true">&rarr;</span></a>
+            </aside>
+
+            <div class="about-main">
+                <section class="about-panel reveal reveal-delay-1" aria-labelledby="aboutTitle">
+                    <h2 class="panel-title" id="aboutTitle">About Me</h2>
                     <p>
                         I'm John Kaith Yamomo, a web developer and editor from Laguna, Philippines, with two years of experience in front-end development and two months of experience in motion graphics editing. I focus on creating responsive and user-friendly websites.
                     </p>
                     <p>
                         I create clean and modern designs with interactive features that make websites easy to use. I also make ads and keep learning new tools and technologies to improve my skills and deliver reliable, visually appealing work.
                     </p>
-                </div>
+                </section>
+
+                <section class="about-panel skills-panel reveal reveal-delay-2" aria-labelledby="skillsTitle">
+                    <h2 class="panel-title" id="skillsTitle">Skills</h2>
+
+                    <div class="skill-categories">
+                        <div class="skill-category">
+                            <h3 class="skill-category-title">Languages</h3>
+                            <ul class="skill-list">
+                                <li class="skill-chip"><img src="{{ url_for('static', filename='images/logo/html.png') }}" alt=""> HTML</li>
+                                <li class="skill-chip"><img src="{{ url_for('static', filename='images/logo/css.png') }}" alt=""> CSS</li>
+                                <li class="skill-chip"><img src="{{ url_for('static', filename='images/logo/JavaScript.png') }}" alt=""> JavaScript</li>
+                                <li class="skill-chip"><img src="{{ url_for('static', filename='images/logo/python.png') }}" alt=""> Python</li>
+                                <li class="skill-chip"><img src="{{ url_for('static', filename='images/logo/php.png') }}" alt=""> PHP</li>
+                                <li class="skill-chip"><img src="{{ url_for('static', filename='images/logo/Cpp.png') }}" alt=""> C++</li>
+                            </ul>
+                        </div>
+
+                        <div class="skill-category">
+                            <h3 class="skill-category-title">Frameworks &amp; Tools</h3>
+                            <ul class="skill-list">
+                                <li class="skill-chip"><img src="{{ url_for('static', filename='images/logo/flask.svg') }}" alt=""> Flask</li>
+                                <li class="skill-chip"><img src="{{ url_for('static', filename='images/logo/mysql.png') }}" alt=""> MySQL</li>
+                                <li class="skill-chip"><img src="{{ url_for('static', filename='images/logo/Git.png') }}" alt=""> Git</li>
+                            </ul>
+                        </div>
+
+                        <div class="skill-category">
+                            <h3 class="skill-category-title">Editing</h3>
+                            <ul class="skill-list">
+                                <li class="skill-chip"><img src="{{ url_for('static', filename='images/logo/AE.png') }}" alt=""> After Effects</li>
+                                <li class="skill-chip"><img src="{{ url_for('static', filename='images/logo/premiere.svg') }}" alt=""> Premiere Pro</li>
+                                <li class="skill-chip"><img src="{{ url_for('static', filename='images/logo/AM.png') }}" alt=""> Alight Motion</li>
+                                <li class="skill-chip"><img src="{{ url_for('static', filename='images/logo/capcut.png') }}" alt=""> CapCut</li>
+                                <li class="skill-chip"><img src="{{ url_for('static', filename='images/logo/handbrake.png') }}" alt=""> HandBrake</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
             </div>
-
-            <section class="skills-section reveal reveal-delay-1">
-                <p class="section-eyebrow">Expertise</p>
-                <h2>Skills</h2>
-
-                <div class="skills-groups">
-                    <div class="skills-group">
-                        <h3 class="skills-subtitle">Programming</h3>
-                        <div class="skills-grid">
-                            <div class="skill reveal reveal-delay-1"><img src="{{ url_for('static', filename='images/logo/html.png') }}" alt=""> HTML</div>
-                            <div class="skill reveal reveal-delay-1"><img src="{{ url_for('static', filename='images/logo/css.png') }}" alt=""> CSS</div>
-                            <div class="skill reveal reveal-delay-2"><img src="{{ url_for('static', filename='images/logo/JavaScript.png') }}" alt=""> JavaScript</div>
-                            <div class="skill reveal reveal-delay-2"><img src="{{ url_for('static', filename='images/logo/python.png') }}" alt=""> Python</div>
-                            <div class="skill reveal reveal-delay-4"><img src="{{ url_for('static', filename='images/logo/Cpp.png') }}" alt=""> C++</div>
-                            <div class="skill reveal reveal-delay-4"><img src="{{ url_for('static', filename='images/logo/Git.png') }}" alt=""> Git</div>
-                            <div class="skill reveal reveal-delay-4"><img src="{{ url_for('static', filename='images/logo/php.png') }}" alt=""> PHP</div>
-                        </div>
-                    </div>
-
-                    <div class="skills-group">
-                        <h3 class="skills-subtitle">Editing Software</h3>
-                        <div class="skills-grid">
-                            <div class="skill reveal reveal-delay-1"><img src="{{ url_for('static', filename='images/logo/AE.png') }}" alt=""> After Effects</div>
-                            <div class="skill reveal reveal-delay-2"><img src="{{ url_for('static', filename='images/logo/AM.png') }}" alt=""> Alight Motion</div>
-                            <div class="skill reveal reveal-delay-3"><img src="{{ url_for('static', filename='images/logo/capcut.png') }}" alt=""> CapCut</div>
-                            <div class="skill reveal reveal-delay-4"><img src="{{ url_for('static', filename='images/logo/handbrake.png') }}" alt=""> HandBrake</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
         </div>
     </main>
 

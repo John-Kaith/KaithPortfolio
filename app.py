@@ -1,10 +1,15 @@
+from collections import deque
 from email.mime.text import MIMEText
 from email.utils import formataddr
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, send_from_directory
 import json
 import logging
+import mimetypes
 import os
+import re
 import smtplib
+import threading
+import time
 import urllib.error
 import urllib.request
 
@@ -12,11 +17,37 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+# Configure logging at import time so INFO lines also reach Render's logs under gunicorn.
+logging.basicConfig(level=logging.INFO, format='%(levelname)s %(name)s: %(message)s')
+
+# Python doesn't know .woff2 on every OS; register it so fonts get the right Content-Type.
+mimetypes.add_type('font/woff2', '.woff2')
+
 app = Flask(__name__)
 logger = logging.getLogger(__name__)
 
 SMTP_TIMEOUT_SECONDS = 10
 HTTP_TIMEOUT_SECONDS = 15
+
+# Drop the CV at static/files/cv.pdf — the About page switches from
+# "CV coming soon" to live View/Download buttons automatically.
+CV_DIRECTORY = os.path.join(app.static_folder, 'files')
+CV_FILENAME = 'cv.pdf'
+CV_DOWNLOAD_NAME = 'John-Kaith-Yamomo-CV.pdf'
+
+MAX_NAME_LENGTH = 100
+MAX_EMAIL_LENGTH = 254
+MAX_MESSAGE_LENGTH = 5000
+EMAIL_PATTERN = re.compile(r'^[^@\s]+@[^@\s]+\.[^@\s]+$')
+
+# Spam protection: cap contact emails per visitor and for the whole site.
+RATE_LIMIT_WINDOW_SECONDS = 60 * 60
+RATE_LIMIT_PER_VISITOR = 3
+RATE_LIMIT_SITE_WIDE = 20
+
+_rate_limit_lock = threading.Lock()
+_visitor_sends = {}
+_site_sends = deque()
 
 
 def _build_contact_message(name, email, message):
@@ -140,6 +171,87 @@ def send_contact_email(name, email, message):
     return send_via_smtp(name, email, message)
 
 
+def validate_contact_form(name, email, message):
+    errors = {}
+
+    if not name:
+        errors['name'] = 'Please enter your name.'
+    elif len(name) > MAX_NAME_LENGTH:
+        errors['name'] = f'Please keep your name under {MAX_NAME_LENGTH} characters.'
+
+    if not email:
+        errors['email'] = 'Please enter your email.'
+    elif len(email) > MAX_EMAIL_LENGTH or not EMAIL_PATTERN.match(email):
+        errors['email'] = 'Please enter a valid email address.'
+
+    if not message:
+        errors['message'] = 'Please write a message.'
+    elif len(message) > MAX_MESSAGE_LENGTH:
+        errors['message'] = f'Please keep your message under {MAX_MESSAGE_LENGTH} characters.'
+
+    return errors
+
+
+def get_client_ip():
+    # Render runs behind a proxy, so the visitor's address is the first X-Forwarded-For entry.
+    forwarded_for = request.headers.get('X-Forwarded-For', '')
+    return forwarded_for.split(',')[0].strip() or request.remote_addr or 'unknown'
+
+
+def allow_send(client_ip):
+    now = time.monotonic()
+    cutoff = now - RATE_LIMIT_WINDOW_SECONDS
+
+    with _rate_limit_lock:
+        while _site_sends and _site_sends[0] < cutoff:
+            _site_sends.popleft()
+
+        visitor_sends = [sent_at for sent_at in _visitor_sends.get(client_ip, []) if sent_at >= cutoff]
+        _visitor_sends[client_ip] = visitor_sends
+
+        if len(visitor_sends) >= RATE_LIMIT_PER_VISITOR or len(_site_sends) >= RATE_LIMIT_SITE_WIDE:
+            return False
+
+        visitor_sends.append(now)
+        _site_sends.append(now)
+
+        # Forget visitors whose window has passed so the table can't grow forever.
+        if len(_visitor_sends) > 1000:
+            for ip in [ip for ip, sends in _visitor_sends.items() if not sends or sends[-1] < cutoff]:
+                del _visitor_sends[ip]
+
+        return True
+
+
+def _format_file_size(num_bytes):
+    if num_bytes >= 1024 * 1024:
+        return f'{num_bytes / (1024 * 1024):.1f} MB'
+    return f'{max(1, round(num_bytes / 1024))} KB'
+
+
+def get_cv_info():
+    path = os.path.join(CV_DIRECTORY, CV_FILENAME)
+    if not os.path.isfile(path):
+        return None
+    return {'size': _format_file_size(os.path.getsize(path))}
+
+
+def send_cv(as_attachment):
+    if not get_cv_info():
+        return redirect(url_for('about'))
+
+    response = send_from_directory(
+        CV_DIRECTORY,
+        CV_FILENAME,
+        mimetype='application/pdf',
+        as_attachment=as_attachment,
+        download_name=CV_DOWNLOAD_NAME,
+    )
+    # Keep the CV (phone number, email) out of search engine results.
+    response.headers['X-Robots-Tag'] = 'noindex'
+    return response
+
+
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -147,7 +259,17 @@ def home():
 
 @app.route('/about')
 def about():
-    return render_template('about.html')
+    return render_template('about.html', cv=get_cv_info())
+
+
+@app.route('/cv')
+def cv_view():
+    return send_cv(as_attachment=False)
+
+
+@app.route('/cv/download')
+def cv_download():
+    return send_cv(as_attachment=True)
 
 
 @app.route('/portfolio')
@@ -157,26 +279,46 @@ def portfolio():
 
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
-    if request.method == 'POST':
-        name = request.form.get('name', '').strip()
-        email = request.form.get('email', '').strip()
-        message = request.form.get('message', '').strip()
+    if request.method == 'GET':
+        return render_template('contact.html', status=request.args.get('status'), form={}, errors={})
 
-        status = 'error'
-        try:
-            if name and email and message:
-                if send_contact_email(name, email, message):
-                    status = 'success'
-        except Exception:
-            logger.exception('Contact form failed unexpectedly')
-            status = 'error'
+    form = {
+        'name': request.form.get('name', '').strip(),
+        'email': request.form.get('email', '').strip(),
+        'message': request.form.get('message', '').strip(),
+    }
 
-        return redirect(url_for('contact', status=status))
+    # Hidden "website" field: people never see it, bots fill it in. Pretend it worked.
+    if request.form.get('website'):
+        logger.warning('Contact form: spam trap triggered, message dropped')
+        return redirect(url_for('contact', status='success'))
 
-    status = request.args.get('status')
-    return render_template('contact.html', status=status)
+    errors = validate_contact_form(form['name'], form['email'], form['message'])
+    if errors:
+        return render_template('contact.html', status=None, form=form, errors=errors), 400
+
+    if not allow_send(get_client_ip()):
+        logger.warning('Contact form: rate limit reached')
+        return render_template('contact.html', status='limited', form=form, errors={}), 429
+
+    try:
+        sent = send_contact_email(form['name'], form['email'], form['message'])
+    except Exception:
+        logger.exception('Contact form failed unexpectedly')
+        sent = False
+
+    if sent:
+        return redirect(url_for('contact', status='success'))
+
+    # Keep what they typed so they can try again without rewriting it.
+    return render_template('contact.html', status='error', form=form, errors={}), 500
+
+
+@app.route('/healthz')
+def healthz():
+    # Lightweight URL for an uptime monitor to ping so Render's free plan doesn't sleep.
+    return 'ok'
 
 
 if __name__ == '__main__':
-    logging.basicConfig(level=logging.INFO)
     app.run(debug=True)

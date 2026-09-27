@@ -7,6 +7,9 @@
     <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" sizes="any">
     <link rel="icon" href="{{ url_for('static', filename='images/favicon.png') }}" type="image/png">
     <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/apple-touch-icon.png') }}">
+    <link rel="preload" href="{{ url_for('static', filename='fonts/myfont.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ url_for('static', filename='fonts/myfont2.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ url_for('static', filename='fonts/myfont3.woff2') }}" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body class="page-enter" data-contact-status="{{ status or '' }}">
@@ -66,18 +69,25 @@
 
             <div class="contact-form-card reveal reveal-delay-1">
                 <h2 class="contact-title">Send a message</h2>
-                <form method="post" action="{{ url_for('contact') }}" novalidate>
-                    <div class="form-group">
+                <form method="post" action="{{ url_for('contact') }}" class="contact-form" novalidate>
+                    <div class="form-group{% if errors.name %} has-error{% endif %}">
                         <label for="name">Name</label>
-                        <input type="text" id="name" name="name" placeholder="Your name" required autocomplete="name">
+                        <input type="text" id="name" name="name" placeholder="Your name" required maxlength="100" autocomplete="name" value="{{ form.name }}" aria-describedby="nameError"{% if errors.name %} aria-invalid="true"{% endif %}>
+                        <p class="form-error" id="nameError" aria-live="polite">{{ errors.name }}</p>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group{% if errors.email %} has-error{% endif %}">
                         <label for="email">Email</label>
-                        <input type="email" id="email" name="email" placeholder="you@example.com" required autocomplete="email">
+                        <input type="email" id="email" name="email" placeholder="you@example.com" required maxlength="254" autocomplete="email" value="{{ form.email }}" aria-describedby="emailError"{% if errors.email %} aria-invalid="true"{% endif %}>
+                        <p class="form-error" id="emailError" aria-live="polite">{{ errors.email }}</p>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group{% if errors.message %} has-error{% endif %}">
                         <label for="message">Message</label>
-                        <textarea id="message" name="message" rows="5" placeholder="Write your message here..." required></textarea>
+                        <textarea id="message" name="message" rows="5" placeholder="Write your message here..." required maxlength="5000" aria-describedby="messageError"{% if errors.message %} aria-invalid="true"{% endif %}>{{ form.message }}</textarea>
+                        <p class="form-error" id="messageError" aria-live="polite">{{ errors.message }}</p>
+                    </div>
+                    <div class="form-trap" aria-hidden="true">
+                        <label for="website">Website</label>
+                        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
                     </div>
                     <button type="submit" class="btn">Send Message</button>
                 </form>

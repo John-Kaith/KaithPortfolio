@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
     initScrollReveal();
     initModals();
     initLightbox();
+    initContactForm();
     initContactStatusModal();
 });
 
@@ -161,6 +162,11 @@ function initModals() {
     }
 
     function openModal(overlay) {
+        // Gallery screenshots only download the first time their project is opened.
+        overlay.querySelectorAll("img[data-src]").forEach(function (img) {
+            img.src = img.dataset.src;
+            img.removeAttribute("data-src");
+        });
         lockPageScroll();
         overlay.classList.add("open");
         overlay.setAttribute("aria-hidden", "false");
@@ -433,6 +439,75 @@ function initLightbox() {
     });
 }
 
+function initContactForm() {
+    const form = document.querySelector(".contact-form");
+    if (!form) return;
+
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const submitLabel = submitBtn ? submitBtn.textContent : "";
+    const EMAIL_PATTERN = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+
+    const rules = {
+        name: function (value) {
+            return value ? "" : "Please enter your name.";
+        },
+        email: function (value) {
+            if (!value) return "Please enter your email.";
+            return EMAIL_PATTERN.test(value) ? "" : "Please enter a valid email address.";
+        },
+        message: function (value) {
+            return value ? "" : "Please write a message.";
+        }
+    };
+
+    function validateField(field) {
+        const error = rules[field.name](field.value.trim());
+        const group = field.closest(".form-group");
+        const errorEl = group.querySelector(".form-error");
+
+        group.classList.toggle("has-error", Boolean(error));
+        field.setAttribute("aria-invalid", error ? "true" : "false");
+        if (errorEl) errorEl.textContent = error;
+        return !error;
+    }
+
+    const fields = Object.keys(rules)
+        .map(function (name) { return form.elements[name]; })
+        .filter(Boolean);
+
+    fields.forEach(function (field) {
+        field.addEventListener("input", function () {
+            if (field.closest(".form-group").classList.contains("has-error")) validateField(field);
+        });
+        field.addEventListener("blur", function () {
+            if (field.value.trim()) validateField(field);
+        });
+    });
+
+    form.addEventListener("submit", function (event) {
+        const invalid = fields.filter(function (field) { return !validateField(field); });
+        if (invalid.length) {
+            event.preventDefault();
+            invalid[0].focus();
+            return;
+        }
+
+        // Stop double-clicks from sending the same message twice.
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Sending…";
+        }
+    });
+
+    // Re-enable the button if the page is restored from the back/forward cache.
+    window.addEventListener("pageshow", function () {
+        if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = submitLabel;
+        }
+    });
+}
+
 function initContactStatusModal() {
     const status = document.body.dataset.contactStatus;
     if (!status) return;
@@ -450,10 +525,16 @@ function initContactStatusModal() {
         text.textContent = "Thank you for reaching out. I will get back to you as soon as possible.";
     } else if (status === "error") {
         title.textContent = "Message not sent";
-        text.textContent = "Something went wrong while sending your message. Please try again later or use the email shown on this page.";
+        text.textContent = "Something went wrong while sending your message. What you wrote is still in the form, so you can try again in a moment or use the email shown on this page.";
+    } else if (status === "limited") {
+        title.textContent = "Too many messages";
+        text.textContent = "You've already sent a few messages recently. Please try again later or use the email shown on this page.";
     } else {
         return;
     }
+
+    // Clear ?status=... (and any POST) from this history entry so a refresh doesn't show the popup again.
+    window.history.replaceState(null, "", window.location.pathname);
 
     function closeStatusModal() {
         overlay.classList.remove("open");
