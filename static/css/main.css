@@ -1279,6 +1279,70 @@ header:has(nav.open) .nav-toggle span:nth-child(3) {
     opacity: 0.85;
 }
 
+/* Featured project ('featured': True in app.py): full-width card, image left and details right on desktop. */
+.project-card--featured {
+    grid-column: 1 / -1;
+    border-color: rgba(228, 239, 106, 0.5);
+    box-shadow: 0 0 0 1px var(--accent-soft), var(--shadow-card);
+}
+
+.project-badge {
+    align-self: flex-start;
+    margin-bottom: 12px;
+    padding: 4px 12px;
+    font-family: 'MyFont2', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #0a0a0a;
+    background: var(--accent);
+    border-radius: var(--radius-pill);
+}
+
+@media (min-width: 901px) {
+    .project-card--featured {
+        flex-direction: row;
+        align-items: stretch;
+    }
+
+    .project-card--featured .project-image {
+        flex: 0 0 58%;
+    }
+
+    .project-card--featured .project-image img {
+        height: 100%;
+        min-height: 360px;
+        object-position: center;
+    }
+
+    .project-card--featured .project-body {
+        justify-content: center;
+        padding: 36px 40px;
+    }
+
+    .project-card--featured .project-title {
+        font-size: 1.75rem;
+    }
+
+    .project-card--featured .project-tech {
+        -webkit-line-clamp: 3;
+        font-size: 0.85rem;
+    }
+
+    .project-card--featured .project-desc {
+        flex: none;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 900px) {
+    .projects-grid .project-card--featured .project-image img {
+        height: auto;
+        aspect-ratio: 5 / 2;
+    }
+}
+
 /* ── Contact ── */
 .contact-section {
     padding: calc(var(--header-h) + 48px) clamp(20px, 5vw, 64px) 80px;
@@ -2234,6 +2298,11 @@ header:has(nav.open) .nav-toggle span:nth-child(3) {
         gap: var(--mobile-card-gap);
     }
 
+    /* Featured card full width on top, then the other websites three per row. */
+    .website-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
     .projects-grid .project-card {
         min-width: 0;
         border-radius: var(--mobile-card-radius);
@@ -2380,13 +2449,55 @@ header:has(nav.open) .nav-toggle span:nth-child(3) {
 @media (max-width: 480px) {
     :root {
         --mobile-page-x: 12px;
-        --mobile-card-img-h: 170px;
-        --mobile-card-title: 1.05rem;
-        --mobile-card-desc: 0.88rem;
+        --mobile-card-gap: 8px;
+        --mobile-card-img-h: 72px;
+        --mobile-card-pad: 8px 8px 10px;
+        --mobile-card-title: 0.75rem;
+        --mobile-card-tech: 0.58rem;
+        --mobile-card-desc: 0.62rem;
+        --mobile-card-hint: 0.6rem;
         --mobile-section-title: 1.15rem;
     }
 
-    .projects-grid {
-        grid-template-columns: minmax(0, 1fr);
+    /* Phones: small cards three per row (websites) and two per row (motion graphics). */
+    .projects-grid .project-tech {
+        margin-bottom: 4px;
+    }
+
+    .projects-grid .project-card-hint {
+        margin-top: 6px;
+    }
+
+    /* The featured card stays full width with readable text. */
+    .projects-grid .project-card--featured .project-image img {
+        aspect-ratio: 2 / 1;
+    }
+
+    .projects-grid .project-card--featured .project-body {
+        padding: 12px 14px 14px;
+    }
+
+    .projects-grid .project-card--featured .project-title {
+        font-size: 0.95rem;
+    }
+
+    .projects-grid .project-card--featured .project-tech {
+        font-size: 0.7rem;
+        margin-bottom: 8px;
+    }
+
+    .projects-grid .project-card--featured .project-desc {
+        font-size: 0.8rem;
+    }
+
+    .projects-grid .project-card--featured .project-card-hint {
+        font-size: 0.74rem;
+        margin-top: 10px;
+    }
+
+    .project-badge {
+        margin-bottom: 8px;
+        padding: 3px 10px;
+        font-size: 0.62rem;
     }
 }

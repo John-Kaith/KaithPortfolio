@@ -70,25 +70,43 @@ SKILL_GROUPS = [
 # Portfolio projects, shown in this order. To add a website: put its screenshots in
 # static/images/projects/ and add an entry below. The first screenshot is also the card
 # image unless a smaller 'thumbnail' is given. 'url' and 'url_note' are optional;
-# without a 'url' the popup shows "Not Available".
+# without a 'url' the popup shows "Not Available". 'featured': True shows the project
+# as a full-width highlighted card (put it first in the list).
 WEBSITE_PROJECTS = [
     {
         'id': 'learniqtrack',
         'name': 'LearnIQ Track',
-        'summary': 'An AI-powered learning platform like Google Classroom, with a Bookworm-style '
-                   'word game, leaderboards, and QR-code attendance.',
-        'overview': 'LearnIQ Track is an AI-powered learning platform for schools, similar to Google '
-                    'Classroom, with accounts for admins/principals, teachers, and students. With one '
-                    'click, AI generates quizzes, activities, reviewers, and flashcards. Its main feature '
-                    'is a Bookworm-style word game where students battle an AI rival, with leaderboards '
-                    'to keep them competitive. Students scan QR codes to log attendance for their '
-                    'subjects and work immersion, and there\'s a mobile app too.',
+        'summary': 'An AI-powered school platform that turns teachers\' uploaded lessons into quizzes '
+                   'and flashcards, with a word battle game, leaderboards, and QR-code attendance.',
+        'overview': 'LearnIQ Track is an AI-powered learning platform for schools, with separate '
+                    'accounts for admins/principals, teachers, and students. Teachers upload their '
+                    'lesson files, and with one click the AI generates quizzes, activities, reviewers, '
+                    'and flashcards based on each lesson\'s content, so students practice exactly what '
+                    'they were taught. Its main feature is a word battle game where students spell out '
+                    'answers to questions from their lessons to defeat an AI rival, with leaderboards '
+                    'that keep them motivated and competitive. Students also scan QR codes to log '
+                    'attendance for their subjects and work immersion, and the platform comes with a '
+                    'companion mobile app.',
         'tech': ['Python', 'FastAPI', 'Supabase', 'Gemini 2.5 Flash', 'HTML', 'CSS', 'JavaScript',
                  'React Native', 'React 19', 'Expo SDK 54', 'Ubuntu Linux', 'Gmail SMTP'],
         'screenshots': ['learniqtrack-4.webp', 'learniqtrack-1.webp', 'learniqtrack-5.webp',
                         'learniqtrack-2.webp', 'learniqtrack-3.webp'],
         'thumbnail': 'learniqtrack-4-thumb.webp',
         'url': 'https://learniqtrack.site',
+        'featured': True,
+    },
+    {
+        'id': 'ecoweave',
+        'name': 'EcoWeave',
+        'summary': 'An e-commerce website for handmade vases and artificial flowers, with shop, cart, '
+                   'checkout, and cash-on-delivery orders.',
+        'overview': 'EcoWeave is an e-commerce website for pink and white home accents, featuring '
+                    'handmade vases and artificial flowers. Customers can browse the collection, manage '
+                    'their cart, place orders, and pay cash on delivery.',
+        'tech': ['PHP', 'HTML', 'CSS', 'JavaScript', 'MySQL'],
+        'screenshots': ['ecoweave-1.webp', 'ecoweave-2.webp', 'ecoweave-3.webp'],
+        'thumbnail': 'ecoweave-1-thumb.webp',
+        'url': 'https://ecoweave-seven.vercel.app/',
     },
     {
         'id': 'mediaverse',
@@ -115,19 +133,6 @@ WEBSITE_PROJECTS = [
         'tech': ['PHP', 'HTML', 'CSS', 'JavaScript', 'MySQL'],
         'screenshots': ['balaylanao-1.webp', 'balaylanao-2.webp', 'balaylanao-3.webp'],
         'thumbnail': 'balaylanao-1-thumb.webp',
-    },
-    {
-        'id': 'ecoweave',
-        'name': 'EcoWeave',
-        'summary': 'An e-commerce website for handmade vases and artificial flowers, with shop, cart, '
-                   'checkout, and cash-on-delivery orders.',
-        'overview': 'EcoWeave is an e-commerce website for pink and white home accents, featuring '
-                    'handmade vases and artificial flowers. Customers can browse the collection, manage '
-                    'their cart, place orders, and pay cash on delivery.',
-        'tech': ['PHP', 'HTML', 'CSS', 'JavaScript', 'MySQL'],
-        'screenshots': ['ecoweave-1.webp', 'ecoweave-2.webp', 'ecoweave-3.webp'],
-        'thumbnail': 'ecoweave-1-thumb.webp',
-        'url': 'https://ecoweave-seven.vercel.app/',
     },
 ]
 
