@@ -210,6 +210,8 @@ def send_via_resend(name, email, message):
         headers={
             'Authorization': f'Bearer {api_key}',
             'Content-Type': 'application/json',
+            # Resend's firewall rejects Python's default "Python-urllib" user agent (error 1010).
+            'User-Agent': 'KaithPortfolio/1.0',
         },
         method='POST',
     )
