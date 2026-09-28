@@ -67,6 +67,91 @@ SKILL_GROUPS = [
     ]),
 ]
 
+# Portfolio projects, shown in this order. To add a website: put its screenshots in
+# static/images/projects/ and add an entry below. The first screenshot is also the card
+# image unless a smaller 'thumbnail' is given. 'url' and 'url_note' are optional;
+# without a 'url' the popup shows "Not Available".
+WEBSITE_PROJECTS = [
+    {
+        'id': 'learniqtrack',
+        'name': 'LearnIQ Track',
+        'summary': 'An AI-powered learning platform like Google Classroom, with a Bookworm-style '
+                   'word game, leaderboards, and QR-code attendance.',
+        'overview': 'LearnIQ Track is an AI-powered learning platform for schools, similar to Google '
+                    'Classroom, with accounts for admins/principals, teachers, and students. With one '
+                    'click, AI generates quizzes, activities, reviewers, and flashcards. Its main feature '
+                    'is a Bookworm-style word game where students battle an AI rival, with leaderboards '
+                    'to keep them competitive. Students scan QR codes to log attendance for their '
+                    'subjects and work immersion, and there\'s a mobile app too.',
+        'tech': ['Python', 'FastAPI', 'Supabase', 'Gemini 2.5 Flash', 'HTML', 'CSS', 'JavaScript',
+                 'React Native', 'React 19', 'Expo SDK 54', 'Ubuntu Linux', 'Gmail SMTP'],
+        'screenshots': ['learniqtrack-4.webp', 'learniqtrack-1.webp', 'learniqtrack-5.webp',
+                        'learniqtrack-2.webp', 'learniqtrack-3.webp'],
+        'thumbnail': 'learniqtrack-4-thumb.webp',
+        'url': 'https://learniqtrack.site',
+    },
+    {
+        'id': 'mediaverse',
+        'name': 'MediaVerse',
+        'summary': 'An e-commerce website where users can buy media, games, books, and educational '
+                   'products with a simple, convenient shopping experience.',
+        'overview': 'MediaVerse is an e-commerce website where users can buy media, games, books, and '
+                    'educational products. It is designed to be easy to use, making browsing and '
+                    'shopping simple and convenient.',
+        'tech': ['Python', 'Flask', 'HTML', 'CSS', 'JavaScript', 'MySQL'],
+        'screenshots': ['mediaverse-1.webp', 'mediaverse-2.webp', 'mediaverse-3.webp'],
+        'thumbnail': 'mediaverse-1-thumb.webp',
+        'url': 'https://mediaverse-968n.onrender.com',
+        'url_note': 'Hosted on a free server, so it may take up to a minute to wake up.',
+    },
+    {
+        'id': 'balaylanao',
+        'name': 'Balaylanao',
+        'summary': 'A booking website that helps customers explore accommodations and special offers '
+                   'through a clear, user-friendly interface.',
+        'overview': 'BalayLanao is a booking website designed to help customers easily explore '
+                    'available accommodations and special offers. It provides clear information and a '
+                    'user-friendly interface, making the booking process simple and convenient.',
+        'tech': ['PHP', 'HTML', 'CSS', 'JavaScript', 'MySQL'],
+        'screenshots': ['balaylanao-1.webp', 'balaylanao-2.webp', 'balaylanao-3.webp'],
+        'thumbnail': 'balaylanao-1-thumb.webp',
+    },
+    {
+        'id': 'ecoweave',
+        'name': 'EcoWeave',
+        'summary': 'An e-commerce website for handmade vases and artificial flowers, with shop, cart, '
+                   'checkout, and cash-on-delivery orders.',
+        'overview': 'EcoWeave is an e-commerce website for pink and white home accents, featuring '
+                    'handmade vases and artificial flowers. Customers can browse the collection, manage '
+                    'their cart, place orders, and pay cash on delivery.',
+        'tech': ['PHP', 'HTML', 'CSS', 'JavaScript', 'MySQL'],
+        'screenshots': ['ecoweave-1.webp', 'ecoweave-2.webp', 'ecoweave-3.webp'],
+        'thumbnail': 'ecoweave-1-thumb.webp',
+        'url': 'https://ecoweave-seven.vercel.app/',
+    },
+]
+
+# Motion graphics: 'thumbnail' (in static/images/projects/) is also the video poster;
+# 'video' is a file in static/videos/.
+MOTION_PROJECTS = [
+    {
+        'id': 'maps',
+        'name': 'Maps',
+        'summary': 'Motion graphics edit for Google Maps.',
+        'tools': ['After Effects', 'HandBrake'],
+        'thumbnail': 'maps.webp',
+        'video': 'Maps.mp4',
+    },
+    {
+        'id': 'spotify',
+        'name': 'Spotify',
+        'summary': 'Motion graphics edit for Spotify.',
+        'tools': ['Premiere Pro', 'After Effects'],
+        'thumbnail': 'spotify.webp',
+        'video': 'Spotify.mp4',
+    },
+]
+
 MAX_NAME_LENGTH = 100
 MAX_EMAIL_LENGTH = 254
 MAX_MESSAGE_LENGTH = 5000
@@ -333,7 +418,11 @@ def cv_download():
 
 @app.route('/portfolio')
 def portfolio():
-    return render_template('portfolio.html')
+    return render_template(
+        'portfolio.html',
+        website_projects=WEBSITE_PROJECTS,
+        motion_projects=MOTION_PROJECTS,
+    )
 
 
 @app.route('/contact', methods=['GET', 'POST'])
