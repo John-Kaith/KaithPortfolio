@@ -33,6 +33,40 @@ HTTP_TIMEOUT_SECONDS = 15
 # "CV coming soon" to live View/Download buttons automatically.
 CV_DIRECTORY = os.path.join(app.static_folder, 'cv')
 
+# Skills on the About page: (name, logo file name without extension).
+# A missing logo shows a dashed placeholder until a matching .svg/.png/.webp/.jpg
+# file is added to static/images/logo/.
+LOGO_DIRECTORY = os.path.join(app.static_folder, 'images', 'logo')
+LOGO_EXTENSIONS = ('.svg', '.png', '.webp', '.jpg')
+SKILL_GROUPS = [
+    ('Technical & Design Stack', [
+        ('Python', 'python'),
+        ('Flask', 'flask'),
+        ('PHP', 'php'),
+        ('HTML', 'html'),
+        ('CSS', 'css'),
+        ('JavaScript', 'JavaScript'),
+        ('C++', 'Cpp'),
+        ('Figma', 'figma'),
+        ('MySQL', 'mysql'),
+        ('Supabase', 'supabase'),
+        ('Git', 'Git'),
+    ]),
+    ('Video & Media Editing', [
+        ('Adobe After Effects', 'AE'),
+        ('Adobe Premiere Pro', 'premiere'),
+        ('Adobe Media Encoder', 'mediaencoder'),
+        ('Alight Motion', 'AM'),
+        ('CapCut', 'capcut'),
+        ('HandBrake', 'handbrake'),
+    ]),
+    ('AI & Productivity Tools', [
+        ('Claude Code', 'claudecode'),
+        ('Gemini', 'geminilogo'),
+        ('ChatGPT', 'chatgpt'),
+    ]),
+]
+
 MAX_NAME_LENGTH = 100
 MAX_EMAIL_LENGTH = 254
 MAX_MESSAGE_LENGTH = 5000
@@ -227,6 +261,20 @@ def _format_file_size(num_bytes):
     return f'{max(1, round(num_bytes / 1024))} KB'
 
 
+def find_logo(name):
+    for extension in LOGO_EXTENSIONS:
+        if os.path.isfile(os.path.join(LOGO_DIRECTORY, name + extension)):
+            return f'images/logo/{name}{extension}'
+    return None
+
+
+def get_skill_groups():
+    return [
+        {'title': title, 'skills': [{'name': name, 'logo': find_logo(logo)} for name, logo in skills]}
+        for title, skills in SKILL_GROUPS
+    ]
+
+
 def find_cv_filename():
     # With several PDFs, the last by name wins (e.g. YAMOMO_CV_2027.pdf over YAMOMO_CV_2026.pdf).
     try:
@@ -270,7 +318,7 @@ def home():
 
 @app.route('/about')
 def about():
-    return render_template('about.html', cv=get_cv_info())
+    return render_template('about.html', cv=get_cv_info(), skill_groups=get_skill_groups())
 
 
 @app.route('/cv')

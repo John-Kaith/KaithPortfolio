@@ -100,36 +100,66 @@ body.page-enter {
         radial-gradient(ellipse 50% 35% at 50% 45%, rgba(228, 239, 106, 0.06) 0%, transparent 60%);
 }
 
+/* Small bright lights that wander along their own paths and glide back (alternate). */
 .light {
     position: absolute;
-    width: 360px;
-    height: 360px;
-    background: radial-gradient(circle, rgba(228, 239, 106, 0.32) 0%, rgba(228, 239, 106, 0.12) 35%, transparent 72%);
-    filter: blur(65px);
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, rgba(243, 255, 137, 0.7) 10%, rgba(243, 255, 137, 0) 80%);
+    filter: blur(60px);
     border-radius: 50%;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
 }
 
-.light:nth-child(1) { top: 5%;  left: 8%;  animation: drift-a 28s ease-in-out infinite; }
-.light:nth-child(2) { top: 55%; left: 75%; animation: drift-b 32s ease-in-out infinite; }
-.light:nth-child(3) { top: 70%; left: 20%; animation: drift-c 30s ease-in-out infinite; }
-.light:nth-child(4) { top: 30%; left: 50%; animation: drift-a 26s ease-in-out infinite reverse; }
-.light:nth-child(5) { top: 10%; left: 60%; animation: drift-b 34s ease-in-out infinite reverse; }
+.light:nth-child(1) { top: 10%; left: 5%;  animation: floatPath1 20s infinite alternate ease-in-out; }
+.light:nth-child(2) { top: 40%; left: 85%; animation: floatPath2 22s infinite alternate ease-in-out; }
+.light:nth-child(3) { top: 75%; left: 25%; animation: floatPath3 24s infinite alternate ease-in-out; }
+.light:nth-child(4) { top: 50%; left: 55%; animation: floatPath4 21s infinite alternate ease-in-out; }
+.light:nth-child(5) { top: 10%; left: 50%; animation: floatPath5 23s infinite alternate ease-in-out; }
 
-@keyframes drift-a {
-    0%   { transform: translate(0, 0); }
-    100% { transform: translate(40px, -30px); }
+@keyframes floatPath1 {
+    0%   { transform: translate(0, 0) scale(1); }
+    25%  { transform: translate(50px, -80px) scale(1.1); }
+    50%  { transform: translate(-100px, 50px) scale(0.9); }
+    75%  { transform: translate(70px, -60px) scale(1.2); }
+    100% { transform: translate(-50px, 100px) scale(1); }
 }
 
-@keyframes drift-b {
-    0%   { transform: translate(0, 0); }
-    100% { transform: translate(-35px, 25px); }
+@keyframes floatPath2 {
+    0%   { transform: translate(0, 0) scale(1); }
+    25%  { transform: translate(-80px, 40px) scale(1.1); }
+    50%  { transform: translate(90px, -90px) scale(0.9); }
+    75%  { transform: translate(-60px, 70px) scale(1.2); }
+    100% { transform: translate(100px, -50px) scale(1); }
 }
 
-@keyframes drift-c {
-    0%   { transform: translate(0, 0); }
-    100% { transform: translate(25px, 35px); }
+@keyframes floatPath3 {
+    0%   { transform: translate(0, 0) scale(1); }
+    25%  { transform: translate(100px, 30px) scale(1.1); }
+    50%  { transform: translate(-120px, -80px) scale(0.9); }
+    75%  { transform: translate(50px, 60px) scale(1.2); }
+    100% { transform: translate(-90px, -50px) scale(1); }
+}
+
+@keyframes floatPath4 {
+    0%   { transform: translate(0, 0) scale(1); }
+    25%  { transform: translate(-50px, -100px) scale(1.1); }
+    50%  { transform: translate(70px, 80px) scale(0.9); }
+    75%  { transform: translate(-100px, 30px) scale(1.2); }
+    100% { transform: translate(80px, -70px) scale(1); }
+}
+
+@keyframes floatPath5 {
+    0%   { transform: translate(0, 0) scale(1); }
+    25%  { transform: translate(90px, -50px) scale(1.1); }
+    50%  { transform: translate(-70px, 100px) scale(0.9); }
+    75%  { transform: translate(120px, -60px) scale(1.2); }
+    100% { transform: translate(-50px, 80px) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .light {
+        animation: none;
+    }
 }
 
 /* ── Header / nav (original centered layout) ── */
@@ -400,12 +430,6 @@ header:has(nav.open) .nav-toggle span:nth-child(3) {
     .portfolio-header,
     .portfolio-label {
         text-align: left;
-    }
-
-    .light {
-        width: 220px;
-        height: 220px;
-        filter: blur(50px);
     }
 
     .lightbox-overlay {
@@ -946,6 +970,20 @@ header:has(nav.open) .nav-toggle span:nth-child(3) {
     height: 18px;
     object-fit: contain;
     flex-shrink: 0;
+}
+
+/* Reserved spot for a logo that hasn't been added yet (see SKILL_GROUPS in app.py). */
+.skill-logo-slot {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    border: 1px dashed var(--accent-border);
+    border-radius: 4px;
+    font-size: 0.6rem;
+    color: var(--text-muted);
 }
 
 @media (max-width: 900px) {

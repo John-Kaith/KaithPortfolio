@@ -91,37 +91,19 @@
                     <h2 class="panel-title" id="skillsTitle">Skills</h2>
 
                     <div class="skill-categories">
+                        {% for group in skill_groups %}
                         <div class="skill-category">
-                            <h3 class="skill-category-title">Languages</h3>
+                            <h3 class="skill-category-title">{{ group.title }}</h3>
                             <ul class="skill-list">
-                                <li class="skill-chip"><img src="{{ url_for('static', filename='images/logo/html.png') }}" alt=""> HTML</li>
-                                <li class="skill-chip"><img src="{{ url_for('static', filename='images/logo/css.png') }}" alt=""> CSS</li>
-                                <li class="skill-chip"><img src="{{ url_for('static', filename='images/logo/JavaScript.png') }}" alt=""> JavaScript</li>
-                                <li class="skill-chip"><img src="{{ url_for('static', filename='images/logo/python.png') }}" alt=""> Python</li>
-                                <li class="skill-chip"><img src="{{ url_for('static', filename='images/logo/php.png') }}" alt=""> PHP</li>
-                                <li class="skill-chip"><img src="{{ url_for('static', filename='images/logo/Cpp.png') }}" alt=""> C++</li>
+                                {% for skill in group.skills %}
+                                <li class="skill-chip">
+                                    {% if skill.logo %}<img src="{{ url_for('static', filename=skill.logo) }}" alt="">{% else %}<span class="skill-logo-slot" aria-hidden="true">{{ skill.name[0] }}</span>{% endif %}
+                                    {{ skill.name }}
+                                </li>
+                                {% endfor %}
                             </ul>
                         </div>
-
-                        <div class="skill-category">
-                            <h3 class="skill-category-title">Frameworks &amp; Tools</h3>
-                            <ul class="skill-list">
-                                <li class="skill-chip"><img src="{{ url_for('static', filename='images/logo/flask.svg') }}" alt=""> Flask</li>
-                                <li class="skill-chip"><img src="{{ url_for('static', filename='images/logo/mysql.png') }}" alt=""> MySQL</li>
-                                <li class="skill-chip"><img src="{{ url_for('static', filename='images/logo/Git.png') }}" alt=""> Git</li>
-                            </ul>
-                        </div>
-
-                        <div class="skill-category">
-                            <h3 class="skill-category-title">Editing</h3>
-                            <ul class="skill-list">
-                                <li class="skill-chip"><img src="{{ url_for('static', filename='images/logo/AE.png') }}" alt=""> After Effects</li>
-                                <li class="skill-chip"><img src="{{ url_for('static', filename='images/logo/premiere.svg') }}" alt=""> Premiere Pro</li>
-                                <li class="skill-chip"><img src="{{ url_for('static', filename='images/logo/AM.png') }}" alt=""> Alight Motion</li>
-                                <li class="skill-chip"><img src="{{ url_for('static', filename='images/logo/capcut.png') }}" alt=""> CapCut</li>
-                                <li class="skill-chip"><img src="{{ url_for('static', filename='images/logo/handbrake.png') }}" alt=""> HandBrake</li>
-                            </ul>
-                        </div>
+                        {% endfor %}
                     </div>
                 </section>
             </div>
